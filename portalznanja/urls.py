@@ -1,7 +1,12 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import *
 
-# Uncomment the next two lines to enable the admin:
+# Uncomment the next line to enable the admin:
 from django.contrib import admin
+
+#Portalznanja views:
+from web import views as views
+
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
@@ -14,4 +19,15 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
+
+    #Portal znanja home page:
+    url(r'^$', views.HomeView.as_view(), name='home'),
+
+    #Search
+    url(r'^$', views.SearchView.as_view()),
+
+    #User management:
+    url(r'^login/$', views.LoginView),
+    url(r'^user/$', views.UserView.as_view()),
+    url(r'^logout/$', views.LogoutView),
 )

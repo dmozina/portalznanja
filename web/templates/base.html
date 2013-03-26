@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}{% endblock %}| Portal Znanja</title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/default.css" type="text/css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/main_style.css" type="text/css" />
+</head>
+<body>
+    {% include "header.html" %}
+    <div id="main_wrapper">
+        {% block body %}{% endblock %}
+    </div>
+    {% include "footer.html" %}
+</body>
+</html>
