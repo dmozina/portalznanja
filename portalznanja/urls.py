@@ -21,7 +21,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     #Portal znanja home page:
-    url(r'^$', views.HomeView.as_view(), name='home'),
+    url(r'^$', views.HomeView, name='home'),
 
     #Search
     url(r'^$', views.SearchView.as_view()),
