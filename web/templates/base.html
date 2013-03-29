@@ -9,6 +9,7 @@
 <body>
     {% include "header.html" %}
     <div id="main_wrapper">
+        {% if user_firstName %}<label id="user"> Welcome, <a href="/user">{{ user_firstName }}</a>!</label> {% endif %}
         {% block body %}{% endblock %}
     </div>
     {% include "footer.html" %}

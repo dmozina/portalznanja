@@ -123,7 +123,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 
-    #App for all frontend files
+    #Module for frontend files and actions.
     'web',
 )
 

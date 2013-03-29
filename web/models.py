@@ -1,18 +1,21 @@
-__author__ = 'David'
+__author__ = 'David, Alexander, Busho'
 
 from django.db import models
+from django.contrib.auth.models import User
 
-class User(models.Model):
-    GENRE_OPTIONS = (
-        ('M', 'Male'),
-        ('F', 'Female'),
-    )
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=40)
-    user_name = models.CharField(max_length=20)
-    user_password = models.CharField(max_length=150)
-    email = models.EmailField()
-    genre = models.CharField(max_length=2, choices=GENRE_OPTIONS)
+class Custom_user(models.Model):
+    user = models.OneToOneField(User)
+
+
+class User_preferences(models.Model):
+    LANGUAGES = ()
+    TIMEZONES = ()
+    language = models.IntegerField(choices=LANGUAGES)
+    timezone = models.IntegerField(choices=TIMEZONES)
+    subscribe = models.BooleanField(default=False)
+    signature = models.TextField(max_length=100)
+    user = models.ForeignKey(Custom_user)
+
 
 class Video_resource(models.Model):
     RATING_OPTIONS = (
@@ -22,21 +25,33 @@ class Video_resource(models.Model):
         (4, 'Very good'),
         (5, 'Excellent'),
     )
-    title = models.CharField(max_length=150)
+    QUALITY = (
+        #TODO: insert quality choices
+    )
+    title = models.TextField(max_length=150)
     url = models.URLField()
     length = models.IntegerField()
-    quality = models.IntegerField()
-    genre = models.CharField(max_length=100)
+    quality = models.IntegerField(choices=QUALITY)
+    genre = models.TextField(max_length=100)
     rating = models.IntegerField(choices=RATING_OPTIONS)
+    owner = models.ForeignKey(Custom_user)
+
 
 class Comment(models.Model):
-    video = models.ForeignKey(Video_resource)
+    owner = models.ForeignKey(Custom_user)
     date_time = models.DateTimeField()
-    comment_text = models.TextField()
-    user = models.ForeignKey(User)
+    comment_text = models.TextField(max_length=1000)
+    active = models.BooleanField(default=True)
+
+
+class Topic(models.Model):
+    video = models.ForeignKey(Video_resource)
+    comments = models.ManyToManyField(Comment)
+
+
 
 class Audit(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(Custom_user)
     login_datetime = models.DateTimeField()
     logout_datetime = models.DateTimeField()
     session_time = models.DecimalField(max_digits=20, decimal_places=5)
