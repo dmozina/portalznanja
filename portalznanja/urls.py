@@ -27,7 +27,7 @@ urlpatterns = patterns('',
     url(r'^search$', views.SearchView),
 
     #User management:
-    url(r'^login/$', views.LoginView),
-    url(r'^logout/$', views.LogoutView),
+    url(r'^login/$', views.LoginView, name='login'),
+    url(r'^logout/$', views.LogoutView, name='logout'),
     url(r'^user/$', views.UserView),
 )
