@@ -21,7 +21,7 @@ def getUserName(request):
 # authorize user wishing to login. This is done via the inherited authenticate() and login() methods provided
 # by the authentication middleware components.
 def LoginView(request):
-    if request.method == 'GET' and not request.user.is_authenticated():
+    if request.method == 'GET' or request.user.is_authenticated():
         return render_to_response('login.html', None, context_instance=RequestContext(request))
     else:
         if request.POST['un'] != None and request.POST['pw'] != None:

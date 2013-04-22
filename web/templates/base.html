@@ -7,11 +7,35 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/main_style.css" type="text/css" />
 </head>
 <body>
-    {% include "header.html" %}
+    <div id="header">
+        <h5>HEADER:</h5>
+        <div id="logo_container"></div>
+        <div id="padding"></div>
+        <div id="menu">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% else %}
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
     <div id="main_wrapper">
         {% if user_firstName %}<label id="user"> Welcome, <a href="/user">{{ user_firstName }}</a>!</label> {% endif %}
         {% block body %}{% endblock %}
     </div>
-    {% include "footer.html" %}
+    <div id="footer">
+        <h5>FOOTER:</h5>
+        <div id="info">
+            Developed by:
+            <ul>
+                <li>David Možina</li>
+                <li>Boštjan Lasnik</li>
+                <li>Oleksandr Slivak</li>
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
