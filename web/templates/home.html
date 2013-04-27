@@ -1,4 +1,20 @@
 {% extends 'base.html' %}
 
 {% block title %} Home {% endblock %}
-{% block body %} <h1>Main page for IPRI/PortalZnanja!! </h1>{% endblock %}
+{% block body %}
+<h1>Main page for IPRI/PortalZnanja!! </h1>
+<html lang="en" ng-app = newApp>
+<body ng-controller="VideoListCtrl">
+    <div id="home_videos">
+        <!--Body content-->
+        <ol>
+            <li ng-repeat="video in videos">
+                {[{video.id}]}
+                <p>{[{video.title}]}</p>
+                <img height = "150" width = "150" src = " {[{ video.image }]} ">
+            </li>
+        </ol>
+    </div>
+</body>
+</html>
+{% endblock %}
