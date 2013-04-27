@@ -9,9 +9,19 @@
 angular.module('ipriServices', ['ngResource'])
     .factory('Video', function($resource){
         return $resource('/api/v1/featured/?format=json', {}, {
-            query: {method:'GET', isArray:true}
+            query: {method:'GET', isArray:false}
         });
     })
+    .factory('Team', function($resource){
+        return $resource('/api/v1/team', {}, {
+            query: {method:'GET', isArray:false}
+        });
+    })
+    .factory('Student', function($resource){
+        return $resource('/api/v1/student', {}, {
+            query: {method:'GET', isArray:false}
+        });
+    });
 
    /** .factory('Student', function($resource){
         return $resource('/api/v1/student', {}, {

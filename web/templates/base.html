@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" {% block html_attributes %}{% endblock %}>
 <head>
     <meta charset="utf-8" />
     <title>{% block title %}{% endblock %}| Portal Znanja</title>
@@ -10,7 +10,7 @@
     <script src="{{ STATIC_URL }}js/app.js"></script>
     <script src="{{ STATIC_URL }}js/services.js"></script>
 </head>
-<body>
+<body  {% block body_attributes %}{% endblock %}>
     <div id="header">
         <h5>HEADER:</h5>
         <div id="logo_container"></div>
@@ -29,6 +29,10 @@
     <div id="main_wrapper">
         {% if user_firstName %}<label id="user"> Welcome, <a href="/user">{{ user_firstName }}</a>!</label> {% endif %}
         {% block body %}{% endblock %}
+    </div>
+    <div id="feutured_videos">
+        {% block content %}
+        {% endblock %}
     </div>
     <div id="footer">
         <h5>FOOTER:</h5>

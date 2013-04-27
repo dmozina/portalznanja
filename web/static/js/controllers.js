@@ -1,7 +1,9 @@
 'use strict';
 
-function IpriCtrl($scope, Video, Student) {
-    $scope.video = Video.query().video;
+function IpriCtrl($scope, Team, Student, Video) {
+    $scope.videos = Video.query();
+    $scope.teams = Team.query();
     $scope.students = Student.query();
 }
+
 
