@@ -7,13 +7,15 @@
  */
 
 angular.module('ipriServices', ['ngResource'])
-    .factory('Team', function($resource){
-        return $resource('/api/v1/team', {}, {
-            query: {method:'GET', isArray:false}
+    .factory('Video', function($resource){
+        return $resource('/api/v1/featured/?format=json', {}, {
+            query: {method:'GET', isArray:true}
         });
     })
-    .factory('Student', function($resource){
+
+   /** .factory('Student', function($resource){
         return $resource('/api/v1/student', {}, {
             query: {method:'GET', isArray:false}
         });
     });
+*/
