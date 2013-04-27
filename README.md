@@ -1,6 +1,4 @@
 portalznanja
 ============
 
-Testing u/p:
-Username: test
-Password: test
+Providing videos from numerous different sources though single interface!

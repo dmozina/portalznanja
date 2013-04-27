@@ -62,3 +62,9 @@ def UserView(request):
         return render_to_response('login.html', None, context_instance=RequestContext(request,
             {'user_firstName': getUserName(request),}))
 
+
+# User view. Authenticated users can modify their preferences via this interface.
+def VideoView(request):
+    return render_to_response('video.html', None, context_instance=RequestContext(request,
+            {'user_firstName': getUserName(request),}))
+

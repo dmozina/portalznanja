@@ -125,6 +125,8 @@ INSTALLED_APPS = (
 
     #Module for frontend files and actions.
     'web',
+    'api',
+    'tastypie'
 )
 
 # A sample logging configuration. The only tangible logging
