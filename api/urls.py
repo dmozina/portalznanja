@@ -9,6 +9,7 @@ v1_api.register(Video4FeaturedResource())
 v1_api.register(FeaturedResource())
 
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^api/', include(v1_api.urls)),
 )
