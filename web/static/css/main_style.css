@@ -19,4 +19,6 @@
 
 #home_videos li {
     float:left;
+    display:inline;
+    height: 500px;
 }

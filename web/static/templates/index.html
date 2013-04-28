@@ -1,15 +1,8 @@
-<h1>IPRI 2013</h1>
-
-<h2>Teams</h2>
+<h2>Courses</h2>
 <ul>
-    <li ng-repeat="video in videos">
-        {{video.title}}
-    </li>
-</ul>
-
-<h2>Students</h2>
-<ul>
-    <li ng-repeat="video in item.re student in students.objects">
-        {{student.name}} {{student.surname}}
+    <li ng-repeat="(item_num, items) in videos.objects">
+        <p>{{"id_videa: "}} {{items.video.id}}</p>
+        <p>{{ "title:" }} {{ items.video.title}}</p>
+        <img src="static/images/{{items.video.displayImage}}">
     </li>
 </ul>

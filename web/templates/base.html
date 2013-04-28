@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" {% block html_attributes %}{% endblock %}>
+<html lang="en" {% block html_attributes %}ng-app="ipri"{% endblock %}>
 <head>
     <meta charset="utf-8" />
     <title>{% block title %}{% endblock %}| Portal Znanja</title>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/default.css" type="text/css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/main_style.css" type="text/css" />
     <script src="{{ STATIC_URL }}lib/angular/angular.js"></script>
+    <script src="{{ STATIC_URL }}lib/angular/angular-resource.js"></script>
     <script src="{{ STATIC_URL }}js/controllers.js"></script>
     <script src="{{ STATIC_URL }}js/app.js"></script>
     <script src="{{ STATIC_URL }}js/services.js"></script>
 </head>
-<body  {% block body_attributes %}{% endblock %}>
+<body  {% block body_attributes %}ng-controller="IpriCtrl"{% endblock %}>
     <div id="header">
         <h5>HEADER:</h5>
         <div id="logo_container"></div>
@@ -26,13 +27,8 @@
             </ul>
         </div>
     </div>
-    <div id="main_wrapper">
-        {% if user_firstName %}<label id="user"> Welcome, <a href="/user">{{ user_firstName }}</a>!</label> {% endif %}
-        {% block body %}{% endblock %}
-    </div>
-    <div id="feutured_videos">
-        {% block content %}
-        {% endblock %}
+    <div class = "featured" ng-view>
+
     </div>
     <div id="footer">
         <h5>FOOTER:</h5>
