@@ -1,0 +1,18 @@
+TODO list:
+
+From 29.4.2013:
+    - Frontend:
+        * Add logo animation to the logo container in base.html
+        * Fix numerous width and height issues.
+        * Figure out the theme for videos, etc.
+
+    - Backend:
+        * Create media folder for images
+        * Implement web services (and angular JS on frontend) for /video page to load video stream and comments.
+        * Implement login/logout fully with web service.
+        * Add login data to Audit table.
+        * Figure out the /search functionality and web services
+
+        Non prioritized:
+        * Work on HTML parser for video originating from selected providers.
+        * Create functionality page on /admin to alter featured table.

@@ -2,10 +2,14 @@ from tastypie import fields
 from tastypie.resources import ModelResource
 from web.models import FeaturedVideo, Video
 
-#Video provider for featuredVideo requests. We read Video table and only return viable information:
-    #id for page redirection to /video?id=<video_id>
+
+#This is custom video web service called from featured
+# video web service. It returns the following columns from the
+#Video table.
+    #id -  for page redirection to /video?id=<video_id>
     #title
-    #displayImage -> for JS to grab image from media folder and display it
+    #displayImage - for JS to grab image from media folder and display it
+
 class Video4FeaturedResource(ModelResource):
     class Meta:
         queryset = Video.objects.all()
@@ -14,13 +18,13 @@ class Video4FeaturedResource(ModelResource):
         list_allowed_methods = ['get']
 
 
-#Service for featuredVideo functionality. We return videos found the the featuredVideo table.
+#Featured video web service that returns the videos that are
+#currently marked as featured.
 class FeaturedResource(ModelResource):
     video = fields.ForeignKey(Video4FeaturedResource, 'vId', full=True)
+
     class Meta:
         queryset = FeaturedVideo.objects.all()
         resource_name = 'featured'
         excludes = ['id']
         list_allowed_methods = ['get']
-
-

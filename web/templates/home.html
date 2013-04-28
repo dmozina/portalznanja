@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 
 {% block title %} Home {% endblock %}
-{% block content %}
+
+{% block body_attributes %}ng-controller="IpriCtrl"{% endblock %}
+{% block html_attributes %}ng-app="ipri"{% endblock %}
+
+{% block body %}
+    <h2>Featured videos <a href="search?q=featured">(View all)</a>:</h2>
+    <div id="featuredCont" ng-view>
+
+    </div>
 {% endblock %}

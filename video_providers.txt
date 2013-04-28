@@ -1,3 +1,5 @@
+List of video providers that will have videos available on our website:
+
 coursera.org
 videolectures.net
 youtube.com
