@@ -37,5 +37,6 @@ urlpatterns = patterns('',
     url(r'^video/$', views.VideoView, name='video'),
 
     #animation
+    #TODO: change the animation url
     url(r'^animation/$', views.AnimationView, name='animation')
 )

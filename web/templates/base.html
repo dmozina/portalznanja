@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" {% block html_attributes %}ng-app="ipri"{% endblock %}>
+<html lang="en" {% block html_attributes %}{% endblock %}>
 <head>
     <meta charset="utf-8" />
     <title>{% block title %}{% endblock %}| Portal Znanja</title>
@@ -10,41 +10,45 @@
     <script src="{{ STATIC_URL }}js/controllers.js"></script>
     <script src="{{ STATIC_URL }}js/app.js"></script>
     <script src="{{ STATIC_URL }}js/services.js"></script>
-    <script src="{{ STATIC_URL }}js/menu_script.js"></script>
+    <script src="{{ STATIC_URL }}lib/jquery/jquery-1.9.1.js"></script>
+    <script src="{{ STATIC_URL }}lib/jquery/raphael-min.js"></script>
 </head>
-<body  {% block body_attributes %}ng-controller="IpriCtrl"{% endblock %}>
-    <div id="header">
-        <h5>HEADER:</h5>
-        <div id="logo_container"></div>
-        <div id="padding"></div>
-        <div class="menu" >
-            <ul>
-                <li class="active"><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="{% url 'animation' %}">Animation</a></li>
-                <li><a href="">Browse Courses</a></li>
-                <li><a href="">My Panel</a></li>
-                <li><a href="">Discussion Forums</a></li>
-                {% if not user.is_authenticated %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                {% else %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                {% endif %}
-            </ul>
-            <div class="floatr"></div>
+<body  {% block body_attributes %}{% endblock %}>
+    <div id="all_container">
+        <div id="header">
+            <div id="logo_container">
+                <img id="logo" src="{{ STATIC_URL }}images/logo.png" />
+            </div>
+            <div id="menu" >
+                <ul>
+                    <li class="active, menu"><a href="{% url 'home' %}">Home</a></li>
+                    <li class="menu"><a href="">Browse Courses</a></li>
+                    <li class="menu"><a href="{% url 'animation' %}">Animation</a></li>
+                    <li class="menu"><a href="">My Panel</a></li>
+                    <li class="menu"><a href="">Discussion Forums</a></li>
+                    {% if not user.is_authenticated %}
+                        <li class="menu"><a href="{% url 'login' %}">Login</a></li>
+                    {% else %}
+                        <li  class="menu"><a href="{% url 'logout' %}">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="clear"></div>
         </div>
-    </div>
-    <div class = "featured" ng-view>
 
-    </div>
-    <div id="footer">
-        <h5>FOOTER:</h5>
-        <div id="info">
-            Developed by:
-            <ul>
-                <li>David Možina</li>
-                <li>Boštjan Lasnik</li>
-                <li>Oleksandr Slivak</li>
-            </ul>
+        <div id="main_wrapper">
+            {% block body %}{% endblock %}
+        </div>
+
+        <div id="footer">
+            <div id="info">
+                Developed by:
+                <ul>
+                    <li>David Možina</li>
+                    <li>Boštjan Lasnik</li>
+                    <li>Oleksandr Slivak</li>
+                </ul>
+            </div>
         </div>
     </div>
 </body>

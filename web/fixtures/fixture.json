@@ -4,7 +4,7 @@
     "pk": 1,
     "fields": {
 	  "url": "http://d396qusza40orc.cloudfront.net/posa/recoded_videos%2Fschmidt-posa-s3-m1-p1%20%5B9549d6bf%5D%20.mp4",
-      "title": "test video 1",
+      "title": "Math",
       "length": 500,
 	 "ratingSum": 534,
 	  "ratingNum": 55,
@@ -30,7 +30,7 @@
     "pk": 3,
     "fields": {
 	  "url": "http://d396qusza40orc.cloudfront.net/posa/recoded_videos%2Fschmidt-posa-s3-m1-p1%20%5B9549d6bf%5D%20.mp4",
-      "title": "test video 3",
+      "title": "Advanced CS: AI",
       "length": 500,
 	  "ratingSum": 534,
 	  "ratingNum": 55,
@@ -43,12 +43,12 @@
     "pk": 4,
     "fields": {
 	  "url": "http://d396qusza40orc.cloudfront.net/posa/recoded_videos%2Fschmidt-posa-s3-m1-p1%20%5B9549d6bf%5D%20.mp4",
-      "title": "test video 4",
+      "title": "Hobbies: chess",
       "length": 500,
 	  "ratingSum": 534,
 	  "ratingNum": 55,
 	  "owner": 1, 
-	  "displayImage": "testVideo1-12442143145e53.jpg"
+	  "displayImage": "testVideo2-12442143145e53.jpg"
     }
   },
   {
@@ -69,7 +69,7 @@
     "pk": 6,
     "fields": {
 	  "url": "http://d396qusza40orc.cloudfront.net/posa/recoded_videos%2Fschmidt-posa-s3-m1-p1%20%5B9549d6bf%5D%20.mp4",
-      "title": "test video 1",
+      "title": "Algebra",
       "length": 500,
 	  "ratingSum": 534,
 	  "ratingNum": 55,

@@ -50,7 +50,7 @@ class Video(models.Model):
 
 
 #FeaturedVideo model represents videos that are currently globally featured (ea. they are shown on index page
-#when non logged in user visits the index.html page). Currently, this table is managed by admin team (ea. each
+#when non logged in user visits the featured.html page). Currently, this table is managed by admin team (ea. each
 #featured video should be manually inserted into the database).
 class FeaturedVideo(models.Model):
     vId = models.OneToOneField(Video)
