@@ -1,0 +1,8 @@
+<h2>Courses</h2>
+<ul>
+    <li ng-repeat="(item_num, items) in videos.objects">
+        <p>{{"id_videa: "}} {{items.video.id}}</p>
+        <p>{{ "title:" }} {{ items.video.title}}</p>
+        <img src="static/images/{{items.video.displayImage}}">
+    </li>
+</ul>

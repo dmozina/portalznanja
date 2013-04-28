@@ -68,3 +68,7 @@ def VideoView(request):
     return render_to_response('video.html', None, context_instance=RequestContext(request,
             {'user_firstName': getUserName(request),}))
 
+def AnimationView(request):
+    return render_to_response('rapha1.htm', None, context_instance=RequestContext(request,
+            {'user_firstName': getUserName(request),}))
+

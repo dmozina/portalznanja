@@ -34,5 +34,8 @@ urlpatterns = patterns('',
     url(r'^', include('api.urls')),
 
     #Video url
-    url(r'^video/$', views.VideoView, name='video')
+    url(r'^video/$', views.VideoView, name='video'),
+
+    #animation
+    url(r'^animation/$', views.AnimationView, name='animation')
 )
