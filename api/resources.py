@@ -1,3 +1,4 @@
+from django.http.request import HttpRequest
 from tastypie import fields
 from tastypie.resources import ModelResource
 from web.models import FeaturedVideo, Video
@@ -13,7 +14,7 @@ from web.models import FeaturedVideo, Video
 class Video4FeaturedResource(ModelResource):
     class Meta:
         queryset = Video.objects.all()
-        resource_name = 'video4featured'
+        resource_name = 'video'
         excludes = ['ratingNum', 'ratingSum', 'length', 'url']
         list_allowed_methods = ['get']
 
@@ -28,3 +29,12 @@ class FeaturedResource(ModelResource):
         resource_name = 'featured'
         excludes = ['id']
         list_allowed_methods = ['get']
+
+
+#Returns the stream URL for the video with requested video id.
+class VideoStreamResource(ModelResource):
+    class Meta:
+        queryset = Video.objects.all()
+        resource_name = 'videoStream'
+        list_allowed_methods = ['get']
+        excludes = ['id']

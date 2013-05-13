@@ -1,0 +1,11 @@
+<h2 id="videoTitle">{{ videoRel.title }}</h2>
+<h5> Rating: {{ videoRel.ratingNum }}/{{ videoRel.ratingSum }}</h5>
+<h6> Length: {{ videoRel.length }} seconds.</h6><br/>
+
+
+<video id="example_video_1" class="video-js vjs-default-skin"
+       controls preload="auto" width="640" height="300"
+       poster="../static/images/{{videoRel.displayImage}}"
+       data-setup='{"example_option":true}'>
+    <source src="{{videoRel.url}}" type='video/mp4' />
+</video>
