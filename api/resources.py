@@ -1,7 +1,8 @@
 from django.http.request import HttpRequest
 from tastypie import fields
-from tastypie.resources import ModelResource
-from web.models import FeaturedVideo, Video
+from tastypie.resources import ModelResource, ALL_WITH_RELATIONS
+from web.models import FeaturedVideo, Video, Comment
+from django.contrib.auth.models import User
 
 
 #This is custom video web service called from featured
@@ -38,3 +39,40 @@ class VideoStreamResource(ModelResource):
         resource_name = 'videoStream'
         list_allowed_methods = ['get']
         excludes = ['id']
+
+
+#Returns Users.
+class User4VideoResource(ModelResource):
+    class Meta:
+        queryset = User.objects.all()
+        resource_name = 'user'
+        list_allowed_methods = ['get']
+        fields = ['first_name', 'last_name']
+
+
+#Returns the stream URL for the video with requested video id.
+class VideoStreamResource(ModelResource):
+    owner = fields.ForeignKey(User4VideoResource, 'owner', full=True)
+
+    class Meta:
+        queryset = Video.objects.all()
+        resource_name = 'videoStream'
+        list_allowed_methods = ['get']
+        excludes = ['id']
+
+
+#Returns Comments for chosen user id.
+class CommentResource(ModelResource):
+    owner = fields.ForeignKey(User4VideoResource, 'owner', full=True)
+    video = fields.ForeignKey(Video4FeaturedResource, 'video', full=True)
+
+    class Meta:
+        queryset = Comment.objects.all()
+        resource_name = 'comments'
+        list_allowed_methods = ['get']
+        filtering = {
+            'video': ALL_WITH_RELATIONS,  # FFUUUUUUUUUUUUUU - retarded
+        }
+
+
+

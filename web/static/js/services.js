@@ -17,4 +17,10 @@ angular.module('ipriServices', ['ngResource'])
         return $resource('/api/v1/videoStream/' + $location.absUrl().split('=')[1] + '?format=json', {}, {
             query: {method:'GET', isArray:false}
         });
+    })
+
+    .factory('Comments', function($resource, $location){
+        return $resource('/api/v1/comments/?format=json' + '&video=' + $location.absUrl().split('=')[1] , {}, {
+            query: {method:'GET', isArray:false}
+        });
     });
