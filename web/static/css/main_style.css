@@ -12,7 +12,6 @@ body {
     width: 1050px;
 }
 /* ---------------END GLOBAL CSS --------------- */
-
 /* --------------- START HEADER CSS --------------- */
 #header {
     width: 100%;
@@ -103,7 +102,6 @@ ul li.menu a:hover {
 
 
 /* --------------- END FEATURED VIDEOS CSS ---------------*/
-
 /* --------------- START WATCH VIDEO CSS ---------------*/
 
 #videoTitle {
@@ -132,9 +130,31 @@ ul li.menu a:hover {
 }
 
 /* --------------- END WATCH VIDEO CSS ---------------*/
+/* --------------- START SEARCH CSS ---------------*/
 
+#searchContainer {
+    width:25%;
+    float:left;
+    padding:3px;
+    height:200px;
+    border-right: 1px solid #c4c4c4;
+    border-radius : 10px;
+    -moz-border-radius : 10px;
+    -webkit-border-radius : 10px;
+    margin-bottom:10px;
+}
+
+#searchVideosContainer {
+    width:73%;
+    float:left;
+    height:200px;
+}
+
+
+/* --------------- END SEARCH CSS ---------------*/
 /* --------------- START FOOTER CSS ---------------*/
 #footer {
+    clear:both;
     margin-top:15px;
     width: 100%;
     height: 100px;

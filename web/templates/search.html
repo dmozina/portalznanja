@@ -3,5 +3,11 @@
 {% block title %} Search {% endblock %}
 
 {% block body %}
-    Advanced search
+    <div id="searchContainer">
+        <form method="post">
+            <input id="Search" type="Text" name="search" value="Search..." onfocus="{this.value = '';}" onblur="{this.value = 'Search...';}" />
+            <input type="Submit" value="Go" />
+        </form>
+    </div>
+    <div id="searchVideosContainer"></div>
 {% endblock %}
