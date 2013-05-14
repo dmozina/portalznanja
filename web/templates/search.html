@@ -9,5 +9,78 @@
             <input type="Submit" value="Go" />
         </form>
     </div>
-    <div id="searchVideosContainer"></div>
+    <div id="searchVideosContainer">
+        <ul id="vidUl">
+
+        </ul>
+    </div>
+
+
+    <script>
+        //Video.
+        function Video( id, title, image ){
+            this.id = id;
+            this.title = title;
+            this.image = image;
+        }
+        //An array of videos. This will be used to perform search operations.
+        var videos = [];
+
+        //Retrieve data from the server and populate the videos array.
+        $(document).ready(function() {
+            $.ajax({
+                type: 'GET',
+                url: '/api/v1/video/?format=json',
+                dataType:'json',
+                success: function (data) {
+                    $.each(data, function(i, j){
+                        if (i == "objects") {
+                            $.each(j, function(k, l){
+                                var id, title, image;
+                                $.each(l, function(key, value){
+                                    if (key == "displayImage") {
+                                        image = value;
+                                    } else if (key == "id") {
+                                        id = value;
+                                    } else if (key == "title") {
+                                        title = value;
+                                    }
+                                });
+                                videos.push(new Video(id, title, image));
+                            });
+                        }
+                    });
+                    populateHtml();
+                }
+            });
+        });
+
+    function populateHtml () {
+        var ul = document.getElementById("vidUl");
+        //Add videos to the HTML page...
+        for (var i = 0; i < videos.length; i++) {
+            var newLi = document.createElement("li");
+            newLi.classList.add("vid");
+            ul.appendChild(newLi);
+
+            var ti = document.createElement("a");
+            var im = document.createElement("a");
+            newLi.appendChild(ti);
+            newLi.appendChild(im);
+
+            var p = document.createElement("p");
+            var img = document.createElement("img");
+            ti.appendChild(p);
+            im.appendChild(img);
+
+            ti['href'] = "/video?vId=" + videos[i].id;
+            im['href'] = "/video?vId=" + videos[i].id;
+
+            p.innerHTML = "" + videos[i].title;
+            img.classList.add("vidImage");
+            img["src"] = "static/images/" + videos[i].image;
+        }
+    }
+
+    </script>
 {% endblock %}

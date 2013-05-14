@@ -142,13 +142,39 @@ ul li.menu a:hover {
     -moz-border-radius : 10px;
     -webkit-border-radius : 10px;
     margin-bottom:10px;
+    height:100%;
 }
 
 #searchVideosContainer {
-    width:73%;
+    width:70%;
     float:left;
-    height:200px;
+    padding: 0px 20px 20px 20px;
 }
+
+#vidUl {
+    padding-top:5px;
+    list-style: none;
+    display: block;
+}
+
+.vid {
+    width:45%;
+    float:left;
+    text-align: center;
+    display: list-item;
+    margin:8px 8px 9px 0;
+    background-color: #fff;
+    border: 2px solid #e7e7e7;
+}
+
+.vid:hover{
+    border: 2px solid #c4c4c4;
+}
+
+.vidImage {
+    width:75%;
+}
+
 
 
 /* --------------- END SEARCH CSS ---------------*/
