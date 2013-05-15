@@ -9,4 +9,9 @@ function VideoStreamCtrl($scope, VideoStream, Comments) {
     $scope.comments = Comments.query();
 }
 
+function SearchCtrl($scope, SearchLang, SearchCat) {
+    $scope.searchLang = SearchLang.query();
+    $scope.searchCat = SearchCat.query();
+}
+
 

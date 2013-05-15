@@ -13,3 +13,9 @@ angular.module('ipriStream', ['ipriServices']).
         $routeProvider
             .when('/', {templateUrl: '/static/templates/videoStream.html',   controller: VideoStreamCtrl})
     }]);
+
+angular.module('ipriSearch', ['ipriServices']).
+    config(['$routeProvider', function($routeProvider) {
+        $routeProvider
+            .when('/', {templateUrl: '/static/templates/searchOptions.html',   controller: SearchCtrl})
+    }]);

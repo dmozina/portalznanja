@@ -175,6 +175,19 @@ ul li.menu a:hover {
     width:75%;
 }
 
+.searchTitle{
+    font-size: 18px;
+    font-weight: 600;
+    color: #555;
+    display: block;
+    margin-bottom:10px;
+}
+
+.searchOpt {
+    display: block;
+    height:30px;
+}
+
 
 
 /* --------------- END SEARCH CSS ---------------*/

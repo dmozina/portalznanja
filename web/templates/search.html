@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block title %} Search {% endblock %}
+{% block body_attributes %}ng-controller="SearchCtrl"{% endblock %}
+{% block html_attributes %}ng-app="ipriSearch"{% endblock %}
 
 {% block body %}
     <div id="searchContainer">
@@ -8,6 +10,12 @@
             <input id="Search" type="Text" name="search" value="Search..." onfocus="{this.value = '';}" onblur="{this.value = 'Search...';}" />
             <input type="Submit" value="Go" />
         </form>
+        <br/>
+        <br/>
+
+        <div ng-view>
+
+        </div>
     </div>
     <div id="searchVideosContainer">
         <ul id="vidUl">
@@ -18,13 +26,18 @@
 
     <script>
         //Video.
-        function Video( id, title, image ){
+        function Video( id, title, image, language, category ){
             this.id = id;
             this.title = title;
             this.image = image;
+            this.language = language;
+            this.category = category;
         }
-        //An array of videos. This will be used to perform search operations.
+
+        //An arrays of videos. This will be used to perform search operations.
         var videos = [];
+        var featuredVideos = [];
+        var current = [];
 
         //Retrieve data from the server and populate the videos array.
         $(document).ready(function() {
@@ -36,7 +49,7 @@
                     $.each(data, function(i, j){
                         if (i == "objects") {
                             $.each(j, function(k, l){
-                                var id, title, image;
+                                var id, title, image, language, category;
                                 $.each(l, function(key, value){
                                     if (key == "displayImage") {
                                         image = value;
@@ -44,23 +57,88 @@
                                         id = value;
                                     } else if (key == "title") {
                                         title = value;
+                                    } else if (key == "category") {
+                                        $.each(value, function(key2, value2){
+                                            if (key2 == "cat") {
+                                                category = value2;
+                                            }
+                                        });
+                                    } else if (key == "language") {
+                                        $.each(value, function(key3, value3){
+                                            if (key3 == "language") {
+                                                language = value3;
+                                            }
+                                        });
                                     }
                                 });
-                                videos.push(new Video(id, title, image));
+                                videos.push(new Video(id, title, image, language, category));
                             });
                         }
                     });
-                    populateHtml();
+                    document.getElementById("All").checked=true;
+                    current = videos.slice(0);
+                    populateHtml(current);
                 }
-            });
+            })/*.done(function(data) {
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/v1/featured/?format=json',
+                    dataType:'json',
+                    success: function (data2) {
+                        $.each(data2, function(ii, jj){
+                            if (ii == "objects") {
+                                $.each(jj, function(kk, ll){
+                                    if (kk == "video") {
+                                        $.each(ll, function(keyy, valuee){
+                                            var id2, title2, image2, language2, category2;
+                                            if (keyy == "displayImage") {
+                                                image2 = valuee;
+                                            } else if (keyy == "id") {
+                                                id2 = valuee;
+                                            } else if (keyy == "title") {
+                                                title2 = valuee;
+                                            } else if (keyy == "category") {
+                                                $.each(valuee, function(key2, value2){
+                                                    if (key2 == "cat") {
+                                                        category2 = value2;
+                                                    }
+                                                });
+                                            } else if (keyy == "language") {
+                                                $.each(valuee, function(key3, value3){
+                                                    if (key3 == "language") {
+                                                        language2 = value3;
+                                                    }
+                                                });
+                                            }
+                                        });
+                                        featuredVideos.push(new Video(id2, title2, image2, language2, category2));
+                                    }
+                                });
+                            }
+                        });
+                    }
+
+                });
+            })*/;
         });
 
-    function populateHtml () {
+    function search(param) {
+        if (param == "featured") {
+            current = featuredVideos.slice(0);
+            populateHtml(current);
+        } else if (param =="all") {
+            current = videos.slice(0);
+            populateHtml(current);
+        }
+    };
+
+    function populateHtml (vidList) {
         var ul = document.getElementById("vidUl");
+        ul.innerHTML = '';
         //Add videos to the HTML page...
-        for (var i = 0; i < videos.length; i++) {
+        for (var i = 0; i < vidList.length; i++) {
             var newLi = document.createElement("li");
-            newLi.classList.add("vid");
+            newLi.className += " vid";
             ul.appendChild(newLi);
 
             var ti = document.createElement("a");
@@ -73,12 +151,12 @@
             ti.appendChild(p);
             im.appendChild(img);
 
-            ti['href'] = "/video?vId=" + videos[i].id;
-            im['href'] = "/video?vId=" + videos[i].id;
+            ti['href'] = "/video?vId=" + vidList[i].id;
+            im['href'] = "/video?vId=" + vidList[i].id;
 
-            p.innerHTML = "" + videos[i].title;
-            img.classList.add("vidImage");
-            img["src"] = "static/images/" + videos[i].image;
+            p.innerHTML = "" + vidList[i].title;
+            img.className += " vidImage";
+            img["src"] = "static/images/" + vidList[i].image;
         }
     }
 

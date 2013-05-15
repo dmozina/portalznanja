@@ -1,0 +1,18 @@
+<ul>
+    <li class="searchOpt">
+        <input type="radio" name="First" value="All" id="All" onclick='search("all");'/>All
+    </li>
+    <li class="searchOpt">
+        <input type="radio" name="First" value="Featured" id="FT" onclick='search("featured");' disabled/>Featured
+    </li>
+    <br/><br/>
+    <p class="searchTitle" >By language:</p>
+    <li ng-repeat="(item_num, items) in searchLang.objects" class="searchOpt">
+        <input type="checkbox" name="{{ items.language }}" value="{{ items.language }}" id="lan:{{ items.id }}" onclick='search("lan:{{ items.id }}");'/>{{ items.language }}
+    </li>
+    <br/><br/>
+    <p class="searchTitle">By Category:</p>
+    <li ng-repeat="(item_num, items) in searchCat.objects" class="searchOpt">
+        <input type="checkbox" name="{{ items.cat }}" value="{{ items.cat }}" id="cat:{{ items.id }}" onclick='search("cat:{{ items.id }}");'/>{{ items.cat }}
+    </li>
+</ul>

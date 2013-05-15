@@ -21,6 +21,16 @@ class Audit(models.Model):
     session_time = models.DecimalField(max_digits=20, decimal_places=5)
 
 
+# General Category of the video
+class Category(models.Model):
+    cat = models.TextField(max_length=50)
+
+
+# Language of the video
+class Language(models.Model):
+    language = models.TextField(max_length=50)
+
+
 #Video model represent one video uploaded and/or found by internal
 # parser on the selected sites.
 #A video is a lone standing entity and is aways displayed with its
@@ -33,6 +43,8 @@ class Video(models.Model):
     ratingNum = models.IntegerField(default=0)  # number of votes
     owner = models.ForeignKey(User)  # owner of the video
     displayImage = models.TextField(max_length=100)  # URI to the video image
+    language = models.ForeignKey(Language)
+    category = models.ForeignKey(Category)
 
 
 # FeaturedVideo model represents videos that are currently globally

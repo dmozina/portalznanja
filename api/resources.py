@@ -1,8 +1,22 @@
 from django.http.request import HttpRequest
 from tastypie import fields
 from tastypie.resources import ModelResource, ALL_WITH_RELATIONS
-from web.models import FeaturedVideo, Video, Comment
+from web.models import FeaturedVideo, Video, Comment, Language, Category
 from django.contrib.auth.models import User
+
+
+class LanguageResource(ModelResource):
+    class Meta:
+        queryset = Language.objects.all()
+        resource_name = 'language'
+        list_allowed_methods = ['get']
+
+
+class CategoryResource(ModelResource):
+    class Meta:
+        queryset = Category.objects.all()
+        resource_name = 'category'
+        list_allowed_methods = ['get']
 
 
 #This is custom video web service called from featured
@@ -11,8 +25,10 @@ from django.contrib.auth.models import User
     #id -  for page redirection to /video?id=<video_id>
     #title
     #displayImage - for JS to grab image from media folder and display it
-
 class Video4FeaturedResource(ModelResource):
+    language = fields.ForeignKey(LanguageResource, 'language', full=True)
+    category = fields.ForeignKey(CategoryResource, 'category', full=True)
+
     class Meta:
         queryset = Video.objects.all()
         resource_name = 'video'
