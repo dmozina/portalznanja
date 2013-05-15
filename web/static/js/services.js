@@ -36,3 +36,4 @@ angular.module('ipriServices', ['ngResource'])
             query: {method:'GET', isArray:false}
         });
     });
+

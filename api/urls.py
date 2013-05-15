@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, include, url
 
 from tastypie.api import Api
-from resources import Video4FeaturedResource, FeaturedResource, VideoStreamResource, User4VideoResource, CommentResource, LanguageResource, CategoryResource
+from resources import Video4FeaturedResource, FeaturedResource, VideoStreamResource, User4VideoResource,\
+    CommentResource, LanguageResource, CategoryResource
 
 #Default API for PortalZnanja
 v1_api = Api(api_name='v1')

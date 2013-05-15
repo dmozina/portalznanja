@@ -89,6 +89,3 @@ class CommentResource(ModelResource):
         filtering = {
             'video': ALL_WITH_RELATIONS,  # FFUUUUUUUUUUUUUU - retarded
         }
-
-
-
