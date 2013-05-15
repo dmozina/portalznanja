@@ -89,6 +89,7 @@ function getAllVideos() {
             });
             current = videos;
             populateHtml();
+            checkForHash();
         }
 
     });
@@ -238,6 +239,17 @@ function resetBoxes() {
     var nodes = document.getElementsByName("box");
     for (var i = 0; i < nodes.length; i++) {
         nodes[i].checked = true;
+    }
+}
+
+
+/**
+ * Checks for the initial hash URL value. Current we handle only #featured
+ */
+function checkForHash() {
+    if (location.href.indexOf("?q=featured") >= 0)  {
+        document.getElementById("FT").checked = true;
+        search("featured");
     }
 }
 
