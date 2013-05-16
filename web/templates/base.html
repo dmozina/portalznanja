@@ -5,13 +5,19 @@
     <title>{% block title %}{% endblock %}| Portal Znanja</title>
     <link rel="stylesheet" href="{{ STATIC_URL }}css/default.css" type="text/css" />
     <link rel="stylesheet" href="{{ STATIC_URL }}css/main_style.css" type="text/css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/video-js.css" type="text/css" />
     <script src="{{ STATIC_URL }}lib/angular/angular.js"></script>
     <script src="{{ STATIC_URL }}lib/angular/angular-resource.js"></script>
     <script src="{{ STATIC_URL }}js/controllers.js"></script>
     <script src="{{ STATIC_URL }}js/app.js"></script>
     <script src="{{ STATIC_URL }}js/services.js"></script>
+    <script src="{{ STATIC_URL }}js/video.js"></script>
+    <script src="{{ STATIC_URL }}js/search.js"></script>
     <script src="{{ STATIC_URL }}lib/jquery/jquery-1.9.1.js"></script>
     <script src="{{ STATIC_URL }}lib/jquery/raphael-min.js"></script>
+    <script>
+        videojs.options.flash.swf = "{{ STATIC_URL }}js/video-js.swf"
+    </script>
 </head>
 <body  {% block body_attributes %}{% endblock %}>
     <div id="all_container">
@@ -22,7 +28,7 @@
             <div id="menu" >
                 <ul>
                     <li class="active, menu"><a href="{% url 'home' %}">Home</a></li>
-                    <li class="menu"><a href="">Browse Courses</a></li>
+                    <li class="menu"><a href="{% url 'search' %}">Browse Courses</a></li>
                     <li class="menu"><a href="{% url 'animation' %}">Animation</a></li>
                     <li class="menu"><a href="">My Panel</a></li>
                     <li class="menu"><a href="">Discussion Forums</a></li>

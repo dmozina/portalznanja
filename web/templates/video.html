@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %} Video  {% endblock %}
+{% block title %} Video {% endblock %}
+
+{% block body_attributes %}ng-controller="VideoStreamCtrl"{% endblock %}
+{% block html_attributes %}ng-app="ipriStream"{% endblock %}
 
 {% block body %}
+    <div id="videoContainer" ng-view>
 
+    </div>
 {% endblock %}

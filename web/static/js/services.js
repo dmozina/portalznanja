@@ -13,9 +13,27 @@ angular.module('ipriServices', ['ngResource'])
         });
     })
 
-   /** .factory('Student', function($resource){
-        return $resource('/api/v1/student', {}, {
+   .factory('VideoStream', function($resource, $location){
+        return $resource('/api/v1/videoStream/' + $location.absUrl().split('=')[1] + '?format=json', {}, {
+            query: {method:'GET', isArray:false}
+        });
+    })
+
+    .factory('Comments', function($resource, $location){
+        return $resource('/api/v1/comments/?format=json' + '&video=' + $location.absUrl().split('=')[1] , {}, {
+            query: {method:'GET', isArray:false}
+        });
+    })
+
+    .factory('SearchLang', function($resource){
+        return $resource('/api/v1/language/?format=json', {}, {
+            query: {method:'GET', isArray:false}
+        });
+    })
+
+    .factory('SearchCat', function($resource){
+        return $resource('/api/v1/category/?format=json', {}, {
             query: {method:'GET', isArray:false}
         });
     });
-*/
+

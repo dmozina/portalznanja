@@ -1,7 +1,30 @@
 {% extends 'base.html' %}
 
 {% block title %} Search {% endblock %}
+{% block body_attributes %}ng-controller="SearchCtrl"{% endblock %}
+{% block html_attributes %}ng-app="ipriSearch"{% endblock %}
 
 {% block body %}
-    Advanced search
+    <div id="searchContainer">
+        <form method="post">
+            <input id="Search" type="Text" name="search" value="Search..." onfocus="{this.value = '';}" onblur="{this.value = 'Search...';}" />
+            <input type="Submit" value="Go" />
+        </form>
+        <br/>
+        <br/>
+
+        <div ng-view>
+
+        </div>
+    </div>
+    <div id="searchVideosContainer">
+        <ul id="vidUl">
+
+        </ul>
+    </div>
+    <script>
+        $(document).ready(function() {
+            getAllVideos();
+        });
+    </script>
 {% endblock %}

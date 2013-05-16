@@ -17,7 +17,7 @@ urlpatterns = patterns(
     url(r'^$', views.HomeView, name='home'),
 
     #Search subpage.
-    url(r'^search$', views.SearchView),
+    url(r'^search$', views.SearchView, name='search'),
 
     #User management:
     url(r'^login/$', views.LoginView, name='login'),

@@ -1,4 +1,60 @@
 [
+    {
+        "model": "web.category",
+        "pk": 1,
+        "fields": {
+            "cat": "Computer science"
+        }
+    },
+    {
+        "model": "web.category",
+        "pk": 2,
+        "fields": {
+            "cat": "Math"
+        }
+    },
+    {
+        "model": "web.category",
+        "pk": 3,
+        "fields": {
+            "cat": "Hobbies"
+        }
+    },
+    {
+        "model": "web.category",
+        "pk": 4,
+        "fields": {
+            "cat": "Art"
+        }
+    },
+    {
+        "model": "web.language",
+        "pk": 1,
+        "fields": {
+            "language": "Slovenian"
+        }
+    },
+    {
+        "model": "web.language",
+        "pk": 2,
+        "fields": {
+            "language": "English"
+        }
+    },
+    {
+        "model": "web.language",
+        "pk": 3,
+        "fields": {
+            "language": "German"
+        }
+    },
+    {
+        "model": "web.language",
+        "pk": 4,
+        "fields": {
+            "language": "Other"
+        }
+    },
   {
     "model": "web.video",
     "pk": 1,
@@ -9,7 +65,9 @@
 	 "ratingSum": 534,
 	  "ratingNum": 55,
 	  "owner": 1, 
-	  "displayImage": "testVideo1-12442143145e53.jpg"
+	  "displayImage": "testVideo1-12442143145e53.jpg",
+      "language": 1,
+      "category": 2
     }
   },
   {
@@ -22,7 +80,9 @@
 	  "ratingSum": 534,
 	  "ratingNum": 55,
 	  "owner": 1, 
-	  "displayImage": "testVideo1-12442143145e53.jpg"
+	  "displayImage": "testVideo1-12442143145e53.jpg",
+        "language": 2,
+        "category": 1
     }
   },
   {
@@ -35,7 +95,9 @@
 	  "ratingSum": 534,
 	  "ratingNum": 55,
 	  "owner": 1, 
-	  "displayImage": "testVideo1-12442143145e53.jpg"
+	  "displayImage": "testVideo1-12442143145e53.jpg",
+        "language": 2,
+        "category": 1
     }
   },
   {
@@ -48,7 +110,9 @@
 	  "ratingSum": 534,
 	  "ratingNum": 55,
 	  "owner": 1, 
-	  "displayImage": "testVideo2-12442143145e53.jpg"
+	  "displayImage": "testVideo2-12442143145e53.jpg",
+        "language": 2,
+        "category": 3
     }
   },
   {
@@ -61,7 +125,9 @@
 	  "ratingSum": 534,
 	  "ratingNum": 55,
 	  "owner": 1, 
-	  "displayImage": "testVideo1-12442143145e53.jpg"
+	  "displayImage": "testVideo1-12442143145e53.jpg",
+        "language": 2,
+        "category": 1
     }
   },
   {
@@ -74,7 +140,9 @@
 	  "ratingSum": 534,
 	  "ratingNum": 55,
 	  "owner": 1, 
-	  "displayImage": "testVideo1-12442143145e53.jpg"
+	  "displayImage": "testVideo1-12442143145e53.jpg",
+        "language": 3,
+        "category": 1
     }
   },
   {
@@ -87,7 +155,9 @@
 	  "ratingSum": 534,
 	  "ratingNum": 55,
 	  "owner": 1, 
-	  "displayImage": "testVideo1-12442143145e53.jpg"
+	  "displayImage": "testVideo1-12442143145e53.jpg",
+        "language": 4,
+        "category": 1
     }
   },
   {
@@ -100,7 +170,9 @@
 	  "ratingSum": 534,
 	  "ratingNum": 55,
 	  "owner": 1, 
-	  "displayImage": "testVideo1-12442143145e53.jpg"
+	  "displayImage": "testVideo1-12442143145e53.jpg",
+        "language": 1,
+        "category": 1
     }
   },
   {
@@ -122,6 +194,58 @@
     "pk": 3,
     "fields": {
 	  "vId": 3
+    }
+  },
+  {
+	"model": "web.comment",
+    "pk": 1,
+    "fields": {
+	  "owner": 1,
+	  "datePosted": "2013-03-16T17:41:28+00:00",
+	  "text": "This is the default text for this comment. Tralallala.",
+	  "state": 1,
+	  "upVotes": 5,
+	  "downVotes": 3,
+	  "video": 1
+    }
+  },
+  {
+	"model": "web.comment",
+    "pk": 2,
+    "fields": {
+	  "owner": 1,
+	  "datePosted": "2013-03-16T17:41:28+00:00",
+	  "text": "Huhuhuhuh",
+	  "state": 2,
+	  "upVotes": 13,
+	  "downVotes": 3,
+	  "video": 1
+    }
+  },
+  {
+	"model": "web.comment",
+    "pk": 3,
+    "fields": {
+	  "owner": 1,
+	  "datePosted": "2013-03-16T17:41:28+00:00",
+	  "text": "Hopasasasasasa",
+	  "state": 1,
+	  "upVotes": 5,
+	  "downVotes": 3,
+	  "video": 1
+    }
+  },
+  {
+	"model": "web.comment",
+    "pk": 4,
+    "fields": {
+	  "owner": 1,
+	  "datePosted": "2013-03-16T17:41:28+00:00",
+	  "text": "This is the default text for this comment. Tralallala.",
+	  "state": 1,
+	  "upVotes": 5,
+	  "downVotes": 3,
+	  "video": 2
     }
   }
 ]
