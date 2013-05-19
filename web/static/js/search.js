@@ -7,12 +7,13 @@ var featured = [];
 var current = [];
 
 //Video class.
-function Video( id, title, image, language, category ){
+function Video( id, title, image, language, category, tags){
     this.id = id;
     this.title = title;
     this.image = image;
     this.language = language;
     this.category = category;
+    this.tags = tags;
 }
 
 /**
@@ -62,6 +63,7 @@ function getAllVideos() {
                 if (i == "objects") {
                     $.each(j, function(k, l){
                         var id, title, image, language, category;
+                        var tagArray = [];
                         $.each(l, function(key, value){
                             if (key == "displayImage") {
                                 image = value;
@@ -81,9 +83,17 @@ function getAllVideos() {
                                         language = value3;
                                     }
                                 });
+                            } else if (key == "tags") {
+                                $.each(value, function(key4, value4){
+                                    $.each(value4, function(key5, value5){
+                                        if (key5 == "tag_name") {
+                                            tagArray.push(value5.toLowerCase());
+                                        }
+                                    });
+                                });
                             }
                         });
-                        videos.push(new Video(id, title, image, language, category));
+                        videos.push(new Video(id, title, image, language, category, tagArray));
                     });
                 }
             });
@@ -104,6 +114,7 @@ function getAllVideos() {
                         $.each(ll, function(jaja, nene){
                             if (jaja == "video") {
                                 var id2, title2, image2, language2, category2;
+                                var tagArray2 = [];
                                 $.each(nene, function(keyy, valuee){
                                     if (keyy == "displayImage") {
                                         image2 = valuee;
@@ -123,9 +134,17 @@ function getAllVideos() {
                                                 language2 = value3;
                                             }
                                         });
+                                    } else if (keyy == "tags") {
+                                        $.each(valuee, function(key4, value4){
+                                            $.each(value4, function(key5, value5){
+                                                if (key5 == "tag_name") {
+                                                    tagArray2.push(value5.toLowerCase());
+                                                }
+                                            });
+                                        });
                                     }
                                 });
-                                featured.push(new Video(id2, title2, image2, language2, category2));
+                                featured.push(new Video(id2, title2, image2, language2, category2, tagArray2));
                             }
                         });
                     });
@@ -202,6 +221,17 @@ function search(param) {
             }
             remove(current, list);
         }
+    } else {
+        current = [];
+        loop:
+        for (var i = 0; i < videos.length; i++) {
+            for (var j = 0; j < videos[i].tags.length; j++) {
+                if (videos[i].tags[j] == param) {
+                    current.push(videos[i]);
+                    continue loop;
+                }
+            }
+        }
     }
     populateHtml();
 }
@@ -240,8 +270,14 @@ function resetBoxes() {
     for (var i = 0; i < nodes.length; i++) {
         nodes[i].checked = true;
     }
+    document.getElementById("Search").value = "Search...";
 }
 
+
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
 
 /**
  * Checks for the initial hash URL value. Current we handle only #featured
@@ -250,6 +286,10 @@ function checkForHash() {
     if (location.href.indexOf("?q=featured") >= 0)  {
         document.getElementById("FT").checked = true;
         search("featured");
+    } else if (location.href.indexOf("?q=") >=0) {
+        var param = getParameterByName("q").toLowerCase();
+        document.getElementById("Search").value = param;
+        search (param);
     }
 }
 

@@ -6,7 +6,7 @@
 
 {% block body %}
     <div id="searchContainer">
-        <form method="post">
+        <form id="searchForm">
             <input id="Search" type="Text" name="search" value="Search..." onfocus="{this.value = '';}" onblur="{this.value = 'Search...';}" />
             <input type="Submit" value="Go" />
         </form>
@@ -25,6 +25,12 @@
     <script>
         $(document).ready(function() {
             getAllVideos();
+        });
+
+        var frm = $('#searchForm');
+        frm.submit(function () {
+            search($('#Search').val().toLowerCase())
+            return false;
         });
     </script>
 {% endblock %}
