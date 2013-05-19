@@ -3,20 +3,12 @@ __author__ = 'busho'
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login, logout
+from django.http import HttpResponse
+from django.shortcuts import redirect
 
-
-#This method provides user's first_name if user
-#is authenticated or None otherwise. This is used for#
-#welcome,<user_firstName>! label on the pages.#
-#This method should be called from RequestContext
-#constructor where deemed necessary.#
-#@param: RequestContext - user context#
-#@return: user.first_name if authenticated or None otherwise.#
-def getUserName(request):
-    if request.user.is_authenticated():
-        return request.user.first_name
-    else:
-        return None
+from django.contrib.auth.models import User
+from models import Video, Comment
+from datetime import datetime
 
 
 # User login view. On HTTP GET request we provide
@@ -34,16 +26,11 @@ def LoginView(request):
                                 password=request.POST['pw'])
             if user is not None and user.is_active:
                 login(request, user)
-                return render_to_response('home.html', None,
-                                          context_instance=RequestContext(
-                                              request,
-                                          {'user_firstName': getUserName(
-                                              request), }))
+                return redirect('/#/')
             else:
                 return render_to_response('login.html', None,
                                           context_instance=RequestContext(
-                                              request,
-                                          {'result': 'Login unsuccessful!', }))
+                                              request))
 
 
 # User logout view. Inherited logout() method is called which logs
@@ -51,24 +38,20 @@ def LoginView(request):
 #  After logout() method is called we redirect the user to the home.html page.
 def LogoutView(request):
     logout(request)
-    return render_to_response('home.html', None,
-                              context_instance=RequestContext(request,
-                              {'user_firstName': getUserName(request), }))
+    return redirect('/#/')
 
 
 # Home view. Provides home.html page.
 def HomeView(request):
     return render_to_response('home.html', None,
-                              context_instance=RequestContext(request,
-                              {'user_firstName': getUserName(request), }))
+                              context_instance=RequestContext(request))
 
 
 # Search view. Provides search.html page for both authenticated and
 # anonymous users.
 def SearchView(request):
     return render_to_response('search.html', None,
-                              context_instance=RequestContext(request,
-                              {'user_firstName': getUserName(request), }))
+                              context_instance=RequestContext(request))
 
 
 # User view. Authenticated users can modify their preferences
@@ -79,20 +62,72 @@ def UserView(request):
                                   context_instance=RequestContext(request))
     else:
         return render_to_response('login.html', None,
-                                  context_instance=RequestContext(request,
-                                  {'user_firstName': getUserName(request), }))
+                                  context_instance=RequestContext(request))
 
 
 # User view. Authenticated users can modify their preferences
 # via this interface.
 def VideoView(request):
     return render_to_response('video.html', None,
-                              context_instance=RequestContext(request,
-                              {'user_firstName': getUserName(request), }))
+                              context_instance=RequestContext(request))
 
 
 #Currently separated animation. TODO: remove this and integrate in base.html.
 def AnimationView(request):
     return render_to_response('rapha1.htm', None,
-                              context_instance=RequestContext(request,
-                              {'user_firstName': getUserName(request), }))
+                              context_instance=RequestContext(request))
+
+
+#Adds the comment to the video.
+def AddCommentView(request):
+    if request.is_ajax() and request.user.is_authenticated() and request.method == "POST":
+        try:
+            user = User.objects.filter(id=request.user.id)
+            v = Video.objects.get(pk=int(request.POST['videoId']))
+            comment = Comment(owner=request.user, datePosted=datetime.now(), text=request.POST['text'], video=v)
+            comment.save()
+            return HttpResponse(status=200)
+        except:
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=400)
+
+
+#This view is called for up voting, down voting or reporting a comment.
+def ManiCommentView(request):
+    if not request.user.is_authenticated():
+        return HttpResponse(status=403)
+    if request.is_ajax() and request.method == "POST":
+        try:
+            comment = Comment.objects.get(pk=int(request.POST['commentId']))
+            if request.POST['action'] == "up":
+                comment.upVotes += 1
+            elif request.POST['action'] == "down":
+                comment.downVotes += 1
+            comment.save()
+            return HttpResponse(status=200)
+        except:
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=400)
+
+
+#This view is called for up voting, down voting or reporting a video.
+def ManiVideoView(request):
+    if not request.user.is_authenticated():
+        return HttpResponse(status=403)
+    if request.is_ajax() and request.method == "POST":
+        try:
+            video = Video.objects.get(pk=int(request.POST['videoId']))
+            if request.POST['action'] == "up":
+                video.upVotes += 1
+            elif request.POST['action'] == "down":
+                video.downVotes += 1
+            video.save()
+            return HttpResponse(status=200)
+        except:
+            return HttpResponse(status=400)
+    else:
+        return HttpResponse(status=400)
+
+

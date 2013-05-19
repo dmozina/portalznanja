@@ -24,6 +24,9 @@
         <div id="header">
             <div id="logo_container">
                 <img id="logo" src="{{ STATIC_URL }}images/logo.png" />
+                <div id="user">
+                {% if user.is_authenticated %} Welcome, <a href="/user">{{ user.first_name }} </a>!{% endif %}
+                </div>
             </div>
             <div id="menu" >
                 <ul>

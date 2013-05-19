@@ -39,8 +39,8 @@ class Video(models.Model):
     title = models.TextField(max_length=150)
     url = models.URLField()  # url to the original stream origin
     length = models.IntegerField()  # in seconds
-    ratingSum = models.IntegerField(default=0)
-    ratingNum = models.IntegerField(default=0)  # number of votes
+    upVotes = models.IntegerField(default=0)
+    downVotes = models.IntegerField(default=0)  # number of votes
     owner = models.ForeignKey(User)  # owner of the video
     displayImage = models.TextField(max_length=100)  # URI to the video image
     language = models.ForeignKey(Language)

@@ -9,4 +9,111 @@
     <div id="videoContainer" ng-view>
 
     </div>
+    {% if user.is_authenticated %}
+        <br/><br/><h2>Add new comment: </h2> <br/>
+        <label id="numChars">0</label>/1000
+        <form name="input" action="/addComment/" method="post" id="myForm">
+            <textarea cols="77" rows="8" name="text" maxlength=1000 id="txt"></textarea>
+            <input type="text" name="videoId" id="vIdInput" class="hidden">
+            <br/>
+            <input type="submit" value="Comment!"><br/><label id="result"></label>
+        </form>
+        <script>
+            var frm = $('#myForm');
+            frm.submit(function () {
+                $.ajax({
+                    type: frm.attr('method'),
+                    url: frm.attr('action'),
+                    data: frm.serialize(),
+                    statusCode: {
+                        200: function (data) {
+                            $('#result').html("Successfully added new comment!");
+                            $('#result').addClass('green');
+                        },
+                        400: function (data) {
+                            $('#result').html("Error adding new comment!");
+                            $('#result').addClass('red');
+                        }
+                    }
+                });
+                return false;
+            });
+
+            function getParameterByName(name) {
+                var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+                return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+            }
+
+            $(document).ready(function() {
+                $('#vIdInput').val(getParameterByName("vId"));
+
+                $('#txt').keyup(function () {
+                    $('#numChars').html($(this).val().length);
+                });
+
+            });
+        </script>
+    {% endif %}
+    <script>
+        function voteComment(what) {
+            var commentId= what.split(":")[1];
+            var action = "";
+            if (what.charAt(0) == "u") {
+                action = "up";
+            } else if (what.charAt(0) == "d") {
+                action = "down";
+            }
+
+            var keyVal = { "commentId" : commentId, "action" : action}
+            $.ajax({
+                type: "POST",
+                url: "/maniComment/",
+                data: keyVal,
+                statusCode: {
+                    200: function (data) {
+                        $('#resultVote' + commentId).html("Successfully voted!");
+                        $('#resultVote' + commentId).addClass('green');
+                    },
+                    403: function (data) {
+                        window.location = "/login/"
+                    },
+                    400: function (data) {
+                        $('#resultVote' + commentId).html("Error voting!");
+                        $('#resultVote' + commentId).addClass('red');
+                    }
+                }
+            });
+        };
+
+
+        function voteVideo(what) {
+            var videoId= what.split(":")[1];
+            var action = "";
+            if (what.charAt(0) == "u") {
+                action = "up";
+            } else if (what.charAt(0) == "d") {
+                action = "down";
+            }
+
+            var keyVal = { "videoId" : videoId, "action" : action}
+            $.ajax({
+                type: "POST",
+                url: "/maniVideo/",
+                data: keyVal,
+                statusCode: {
+                    200: function (data) {
+                        $('#resultVoteVideo').html("Successfully voted!");
+                        $('#resultVoteVideo').addClass('green');
+                    },
+                    403: function (data) {
+                        window.location = "/login/"
+                    },
+                    400: function (data) {
+                        $('#resultVoteVideo').html("Error voting!");
+                        $('#resultVoteVideo').addClass('red');
+                    }
+                }
+            });
+        }
+    </script>
 {% endblock %}

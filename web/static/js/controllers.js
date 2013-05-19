@@ -13,5 +13,3 @@ function SearchCtrl($scope, SearchLang, SearchCat) {
     $scope.searchLang = SearchLang.query();
     $scope.searchCat = SearchCat.query();
 }
-
-
