@@ -3,21 +3,32 @@
 <h6> Length: {{ videoRel.length }} seconds.</h6><br/>
 Author: {{ videoRel.owner.first_name }}&nbsp;{{ videoRel.owner.last_name }}
 <br/><br/>
-
+<div class="video">
 <video id="example_video_1" class="video-js vjs-default-skin"
        controls preload="auto" width="640" height="300"
        poster="../static/images/{{videoRel.displayImage}}"
        data-setup='{"example_option":true}'>
     <source src="{{videoRel.url}}" type='video/mp4' />
 </video>
-
-<br/><br/>
-<h2>Comments:</h2> <br/>
-<div ng-repeat="(item_num, items) in comments.objects" id="commentContainer">
-    <div class="comment">
-        <p class="commentAuthor">By {{ items.owner.first_name }}&nbsp;{{ items.owner.last_name }} on {{ items.datePosted }} <button  onclick="voteComment('d:{{ items.id }}');" class="right" name="down:{{ items.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_down.png" title="Down vote"/></button><button onclick="voteComment('u:{{ items.id }}');" class="right" name="up:{{ items.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_up.png" title="Up vote"/></button></p>
-        <p class="votes">Up: {{ items.upVotes }}, Down: {{ items.downVotes }} <label id="resultVote{{ items.id }}" class="right" /></p>
-        <div class="separator"></div>
-        <p>{{ items.text }}</p>
-    </div>
 </div>
+<div class="tags">
+    <p>Video tags:</p>
+    <ul>
+        <li ng-repeat="(item_num, items) in videoRel.tags">
+            <a href="/search?q="{{items.tag_name}}>{{items.tag_name}}</a>
+        </li>
+    </ul>
+</div>
+<div class="comments">
+
+    <br/><br/>
+    <h2>Comments:</h2> <br/>
+    <div ng-repeat="(item_num, items) in comments.objects" id="commentContainer">
+        <div class="comment">
+            <p class="commentAuthor">By {{ items.owner.first_name }}&nbsp;{{ items.owner.last_name }} on {{ items.datePosted }} <button  onclick="voteComment('d:{{ items.id }}');" class="right" name="down:{{ items.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_down.png" title="Down vote"/></button><button onclick="voteComment('u:{{ items.id }}');" class="right" name="up:{{ items.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_up.png" title="Up vote"/></button></p>
+            <p class="votes">Up: {{ items.upVotes }}, Down: {{ items.downVotes }} <label id="resultVote{{ items.id }}" class="right" /></p>
+            <div class="separator"></div>
+            <p>{{ items.text }}</p>
+        </div>
+    </div>
+   </div>

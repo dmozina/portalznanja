@@ -1,7 +1,7 @@
 from django.http.request import HttpRequest
 from tastypie import fields
 from tastypie.resources import ModelResource, ALL_WITH_RELATIONS
-from web.models import FeaturedVideo, Video, Comment, Language, Category
+from web.models import FeaturedVideo, Video, Comment, Language, Category, Tag
 from django.contrib.auth.models import User
 
 
@@ -18,16 +18,22 @@ class CategoryResource(ModelResource):
         resource_name = 'category'
         list_allowed_methods = ['get']
 
+class TagResource(ModelResource):
+    class Meta:
+        queryset = Tag.objects.all()
+        resource_name = 'tags'
+        list_allowed_methods = ['get']
 
-#This is custom video web service called from featured
-# video web service. It returns the following columns from the
-#Video table.
+    #This is custom video web service called from featured
+    # video web service. It returns the following columns from the
+    #Video table.
     #id -  for page redirection to /video?id=<video_id>
     #title
     #displayImage - for JS to grab image from media folder and display it
 class Video4FeaturedResource(ModelResource):
     language = fields.ForeignKey(LanguageResource, 'language', full=True)
     category = fields.ForeignKey(CategoryResource, 'category', full=True)
+    tags = fields.ToManyField(TagResource, attribute = 'video_link', full=True)
 
     class Meta:
         queryset = Video.objects.all()
@@ -60,6 +66,8 @@ class User4VideoResource(ModelResource):
 #Returns the stream URL for the video with requested video id.
 class VideoStreamResource(ModelResource):
     owner = fields.ForeignKey(User4VideoResource, 'owner', full=True)
+    tags = fields.ToManyField(TagResource, attribute = 'video_link', full=True)
+    #tags = fields.ManytoManyKey(??)(tag ws, 'video_link', full=True)
 
     class Meta:
         queryset = Video.objects.all()

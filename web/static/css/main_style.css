@@ -135,6 +135,18 @@ ul li.menu a:hover {
     width:640px;
 }
 
+.video {
+    float:left;
+}
+
+.tags {
+    float:left;
+    padding:3px;
+}
+.comments {
+    clear:both;
+}
+
 .hidden {
     visibility: hidden;
 }
