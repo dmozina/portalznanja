@@ -12,10 +12,11 @@ Author: {{ videoRel.owner.first_name }}&nbsp;{{ videoRel.owner.last_name }}
 </video>
 </div>
 <div class="tags">
-    <p>Video tags:</p>
+    <h5 id="tagTitle">Video tags:</h5>
+    <br/>
     <ul>
-        <li ng-repeat="(item_num, items) in videoRel.tags">
-            <a href="/search?q="{{items.tag_name}}>{{items.tag_name}}</a>
+        <li ng-repeat="(item_num, items) in videoRel.tags" class="tagLinkLi">
+            <a href="/search?q={{items.tag_name}}" class="tagLink">{{items.tag_name}}</a>
         </li>
     </ul>
 </div>
