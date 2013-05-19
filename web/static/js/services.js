@@ -14,7 +14,7 @@ angular.module('ipriServices', ['ngResource'])
     })
 
    .factory('VideoStream', function($resource, $location){
-        return $resource('/api/v1/videoStream/' + $location.absUrl().split('=')[1] + '?format=json', {}, {
+        return $resource('/api/v1/videoStream/' + $location.absUrl().split('=')[1] + '/?format=json', {}, {
             query: {method:'GET', isArray:false}
         });
     })

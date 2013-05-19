@@ -25,6 +25,11 @@ body {
     -webkit-border-radius : 10px;
 }
 
+#user {
+    float: right;
+    padding: 50px 30px 0px 0px;
+}
+
 #logo_container {
     padding-left:70px;
 }
@@ -121,6 +126,7 @@ ul li.menu a:hover {
 }
 
 .separator {
+    clear:both;
     border-top: 1px solid #222;
     height: 15px;
 }
@@ -139,6 +145,27 @@ ul li.menu a:hover {
 }
 .comments {
     clear:both;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.red {
+    color: #c00;
+}
+
+.green {
+    color: #0c0;
+}
+
+.right {
+    float:right;
+}
+
+.voteImg {
+    width:20px;
+    height:20px;
 }
 
 /* --------------- END WATCH VIDEO CSS ---------------*/

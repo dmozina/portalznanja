@@ -1,5 +1,5 @@
 <h2 id="videoTitle">{{ videoRel.title }}</h2>
-<h5 id="rating"> Rating: {{ videoRel.ratingNum }}/{{ videoRel.ratingSum }}</h5>
+<h5 id="rating"> Up: {{ videoRel.upVotes }}, Down: {{ videoRel.downVotes }}  <button onclick="voteVideo('u:{{ videoRel.id }}');" name="up:{{ videoRel.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_up.png" title="Up vote"/></button><button  onclick="voteVideo('d:{{ videoRel.id }}');" name="down:{{ videoRel.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_down.png" title="Down vote" /></button> <label id="resultVoteVideo" /></h5>
 <h6> Length: {{ videoRel.length }} seconds.</h6><br/>
 Author: {{ videoRel.owner.first_name }}&nbsp;{{ videoRel.owner.last_name }}
 <br/><br/>
@@ -20,14 +20,15 @@ Author: {{ videoRel.owner.first_name }}&nbsp;{{ videoRel.owner.last_name }}
     </ul>
 </div>
 <div class="comments">
+
     <br/><br/>
-    <h2>Comments: </h2><br/>
+    <h2>Comments:</h2> <br/>
     <div ng-repeat="(item_num, items) in comments.objects" id="commentContainer">
         <div class="comment">
-            <p class="commentAuthor">By {{ items.owner.first_name }}&nbsp;{{ items.owner.last_name }} on {{ items.datePosted }}</p>
-            <p class="votes">Up: {{ items.upVotes }}, Down: {{ items.downVotes }}</p>
+            <p class="commentAuthor">By {{ items.owner.first_name }}&nbsp;{{ items.owner.last_name }} on {{ items.datePosted }} <button  onclick="voteComment('d:{{ items.id }}');" class="right" name="down:{{ items.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_down.png" title="Down vote"/></button><button onclick="voteComment('u:{{ items.id }}');" class="right" name="up:{{ items.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_up.png" title="Up vote"/></button></p>
+            <p class="votes">Up: {{ items.upVotes }}, Down: {{ items.downVotes }} <label id="resultVote{{ items.id }}" class="right" /></p>
             <div class="separator"></div>
             <p>{{ items.text }}</p>
         </div>
     </div>
-</div>
+   </div>

@@ -32,5 +32,9 @@ urlpatterns = patterns(
 
     #animation
     #TODO: change the animation url
-    url(r'^animation/$', views.AnimationView, name='animation')
+    url(r'^animation/$', views.AnimationView, name='animation'),
+
+    url(r'^addComment/$', views.AddCommentView),
+    url(r'^maniComment/$', views.ManiCommentView),
+    url(r'^maniVideo/$', views.ManiVideoView),
 )

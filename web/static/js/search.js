@@ -38,8 +38,8 @@ function populateHtml () {
         ti.appendChild(p);
         im.appendChild(img);
 
-        ti['href'] = "/video?vId=" + current[i].id;
-        im['href'] = "/video?vId=" + current[i].id;
+        ti['href'] = "/video/?vId=" + current[i].id;
+        im['href'] = "/video/?vId=" + current[i].id;
 
         p.innerHTML = "" + current[i].title;
         img.className += " vidImage";

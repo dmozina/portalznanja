@@ -53,6 +53,7 @@ class FeaturedResource(ModelResource):
         excludes = ['id']
         list_allowed_methods = ['get']
 
+
 #Returns Users.
 class User4VideoResource(ModelResource):
     class Meta:
@@ -72,7 +73,6 @@ class VideoStreamResource(ModelResource):
         queryset = Video.objects.all()
         resource_name = 'videoStream'
         list_allowed_methods = ['get']
-        excludes = ['id']
 
 
 #Returns Comments for chosen user id.
@@ -83,7 +83,7 @@ class CommentResource(ModelResource):
     class Meta:
         queryset = Comment.objects.all()
         resource_name = 'comments'
-        list_allowed_methods = ['get']
+        list_allowed_methods = ['get', 'post']
         filtering = {
             'video': ALL_WITH_RELATIONS,  # FFUUUUUUUUUUUUUU - retarded
         }
