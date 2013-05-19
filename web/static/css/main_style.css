@@ -141,8 +141,18 @@ ul li.menu a:hover {
 
 .tags {
     float:left;
-    padding:3px;
+    padding:0px 5px 5px 30px;
 }
+
+.tagLink {
+    color: #00a;
+    text-decoration: underline;
+}
+
+.tagLinkLi {
+    padding-bottom:12px;
+}
+
 .comments {
     clear:both;
 }
