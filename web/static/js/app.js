@@ -19,3 +19,9 @@ angular.module('ipriSearch', ['ipriServices']).
         $routeProvider
             .when('/', {templateUrl: '/static/templates/searchOptions.html',   controller: SearchCtrl})
     }]);
+
+angular.module('ipriUpload', ['ipriServices']).
+    config(['$routeProvider', function($routeProvider) {
+        $routeProvider
+            .when('/', {templateUrl: '/static/templates/upload.html',   controller: SearchCtrl})
+    }]);

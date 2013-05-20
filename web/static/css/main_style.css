@@ -39,7 +39,7 @@ body {
     background-color: #ddd;
     height: 18px;
 }
-ul {
+ul:not(#subContainer) {
     list-style: none;
     display: block;
 }
@@ -48,6 +48,7 @@ ul li.menu {
     float:left;
     text-align: center;
     display: list-item;
+    position:relative;
 }
 
 ul li a {
@@ -58,12 +59,57 @@ ul li a {
     color: #555;
 }
 
-ul li.menu a:hover {
+ul li.menu:not(.sub) a:hover {
     color: #000;
 }
 
 .clear {
     clear:both;
+}
+
+li ul {
+    display:none
+}
+
+li li {
+    display:block;
+    width:14em ;
+    text-align: left;
+    padding-left:4px;
+    background-color: #dfdfdf;
+    margin-bottom:5px;
+}
+
+.topSub{
+    padding-top:7px;
+}
+
+.sub:hover {
+    background-color: #dfdfdf;
+}
+
+li li a {
+    font-size: 18px;
+    font-weight: 500;
+    color: #555;
+    list-style-type: circle;
+}
+
+li li a:hover {
+    color: #000;
+    background-color: #ddd;
+}
+
+li:hover > ul {
+    display:block;
+    position:absolute;
+    top:1.4em;
+    width:14em;
+    z-index:2
+}
+li li:hover ul {
+    left:4em;
+    top:-1px    /* subnav menus align next to their menu item */
 }
 /* --------------- END HEADER CSS ---------------*/
 
@@ -221,7 +267,8 @@ ul li.menu a:hover {
 }
 
 .vidImage {
-    width:75%;
+    width:250px;
+    height:250px;
 }
 
 .searchTitle{
@@ -240,6 +287,19 @@ ul li.menu a:hover {
 
 
 /* --------------- END SEARCH CSS ---------------*/
+
+/* --------------- START UPLOAD CSS ---------------*/
+
+td {
+    vertical-align: middle;
+}
+
+#submit {
+    width: 8em;
+    height:3em;
+}
+
+/* --------------- END UPLOAD CSS ---------------*/
 /* --------------- START FOOTER CSS ---------------*/
 #footer {
     clear:both;

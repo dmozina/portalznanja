@@ -7,9 +7,25 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 
 from django.contrib.auth.models import User
-from models import Video, Comment
+from models import Video, Comment, Language, Category, Tag
 from datetime import datetime
+from portalznanja import settings
 
+
+def handle_uploadVideo(file):
+    if file:
+        destination = open(settings.MEDIA_ROOT + "/" + file.name, 'wb+')
+        for chunk in file.chunks():
+            destination.write(chunk)
+        destination.close()
+
+
+def handle_uploadVideoImage(file):
+    if file:
+        destination = open(settings.STATIC_ROOT + "/images/" + file.name, 'wb+')
+        for chunk in file.chunks():
+            destination.write(chunk)
+        destination.close()
 
 # User login view. On HTTP GET request we provide
 # login.html page and on HTTP POST request we authenticate and
@@ -59,6 +75,67 @@ def SearchView(request):
 def UserView(request):
     if request.user.is_authenticated():
         return render_to_response('user.html', None,
+                                  context_instance=RequestContext(request))
+    else:
+        return render_to_response('login.html', None,
+                                  context_instance=RequestContext(request))
+
+
+# User upload view.
+def UserUploadView(request):
+    if request.user.is_authenticated():
+        if request.method == "GET":
+            return render_to_response('userUpload.html', None,
+                                      context_instance=RequestContext(request))
+        elif request.method == "POST":
+            videoName = request.POST['videoName']
+            vUrl = None
+            if request.POST['ch'] == "own":
+                handle_uploadVideo(request.FILES['videoFile'])
+                vUrl = request.FILES['videoFile'].name
+            elif request.POST['ch'] == "stream":
+                vUrl = request.POST['videoStream']
+            vLanguage = request.POST['language']
+            vCategory = request.POST['category']
+            pic = None
+            if 'pic' not in request.FILES:
+                pic = "testVideo1-12442143145e53.jpg"
+            else:
+                handle_uploadVideoImage(request.FILES['pic'])
+                pic = request.FILES['pic'].name
+
+            lan = Language.objects.get(pk=int(vLanguage))
+            cat = Category.objects.get(pk=int(vCategory))
+
+            video = Video(title=videoName, url="/media/" + vUrl, length=500, owner=request.user, displayImage=pic,
+                          language=lan, category=cat)
+            video.save()
+
+            tags = request.POST['tags'].split(",")
+            for tag in tags:
+                tg, created = Tag.objects.get_or_create(tag_name=tag)
+                video.video_link.add(tg)
+            video.save()
+            return HttpResponse(status=200)
+    else:
+        return render_to_response('login.html', None,
+                                  context_instance=RequestContext(request))
+
+
+# User Videos view.
+def UserVideosView(request):
+    if request.user.is_authenticated():
+        return render_to_response('userVideos.html', None,
+                                  context_instance=RequestContext(request))
+    else:
+        return render_to_response('login.html', None,
+                                  context_instance=RequestContext(request))
+
+
+# User Comments view.
+def UserCommentsView(request):
+    if request.user.is_authenticated():
+        return render_to_response('userComments.html', None,
                                   context_instance=RequestContext(request))
     else:
         return render_to_response('login.html', None,
