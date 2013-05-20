@@ -30,10 +30,12 @@ class Category(models.Model):
 class Language(models.Model):
     language = models.TextField(max_length=50)
 
+
 #Tag model represent tags for each video. Search functionality will
 #search for video tags
 class Tag(models.Model):
-    tag_name    = models.CharField(max_length=100)
+    tag_name = models.CharField(max_length=100)
+
 
 #Video model represent one video uploaded and/or found by internal
 # parser on the selected sites.
@@ -49,7 +51,7 @@ class Video(models.Model):
     displayImage = models.TextField(max_length=100)  # URI to the video image
     language = models.ForeignKey(Language)
     category = models.ForeignKey(Category)
-    video_link  = models.ManyToManyField(Tag)
+    video_link = models.ManyToManyField(Tag)
 
 
 # FeaturedVideo model represents videos that are currently globally

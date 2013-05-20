@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %} User Upload {% endblock %}
+
+{% block body_attributes %}ng-controller="SearchCtrl"{% endblock %}
+{% block html_attributes %}ng-app="ipriUpload"{% endblock %}
+
+{% block body %}
+    <h2>Upload a new video:</h2>
+    <br/>
+    <form id="uploadForm" enctype="multipart/form-data" action="/user/upload" method="post">
+    <div ng-view>
+
+    </div>
+    <br/>
+    <input type="submit" value="Upload video!" id="submit"/>
+    <label id="uploadResult"></label>
+    </form>
+
+    <script>
+        function change(who) {
+            if (who == "stream") {
+                $('#dynamicChoice').html('Paste video stream: <input placeholder="Paste valid video stream URL." type="text" name="videoStream" size="60"/>');
+            } else {
+                $('#dynamicChoice').html('Choose video: <input type="file" name="videoFile" id="videoFile" accept="video/*">');
+            }
+        };
+
+        $(document).ready(function() {
+            var frm = $('#uploadForm');
+            frm.submit(function () {
+                var name = $('#videoName').val();
+                var video;
+                if (document.getElementById("stream").checked) {
+                    video = $('#videoStream').val();
+                } else {
+                    video = $('#videoFile').val();
+
+                }
+
+                var image;
+                if (document.getElementById("autoDisplay").checked == false) {
+                    image = $('#image').val();
+                }
+                var tags = $('#tags').val();
+
+                if (name == "" || video == "" || (document.getElementById("autoDisplay").checked == false && $('#image').val() == "")) {
+                    $('#uploadResult').html("Error: All fields apart from tags must be filled!");
+                    $('#uploadResult').addClass('red');
+                    return false;
+                } else {
+                    $('#uploadResult').html("");
+                    return true;
+                }
+
+            });
+        });
+    </script>
+{% endblock %}

@@ -6,6 +6,9 @@ from django.contrib import admin
 #Portalznanja views:
 from web import views as views
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 admin.autodiscover()
 
 urlpatterns = patterns(
@@ -23,6 +26,9 @@ urlpatterns = patterns(
     url(r'^login/$', views.LoginView, name='login'),
     url(r'^logout/$', views.LogoutView, name='logout'),
     url(r'^user/$', views.UserView),
+    url(r'^user/upload$', views.UserUploadView, name='userUpload'),
+    url(r'^user/videos$', views.UserVideosView, name='userVideos'),
+    url(r'^user/comments$', views.UserCommentsView, name='userComments'),
 
     #Include API URLs
     url(r'^', include('api.urls')),
@@ -37,4 +43,4 @@ urlpatterns = patterns(
     url(r'^addComment/$', views.AddCommentView),
     url(r'^maniComment/$', views.ManiCommentView),
     url(r'^maniVideo/$', views.ManiVideoView),
-)
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,14 @@
+<table>
+    <tr><td><p class="VideoParamTitle">Title:</p></td><td><input placeholder="Type video name." type="text" name="videoName" size="45" maxlength="150" id="videoName"/></td><td></td></tr>
+    <tr><td><p class="VideoParamTitle">Video:</p></td><td>
+        <input type="radio" name="ch" value="stream" id="stream" checked="checked" onclick='change("stream");'/>Video stream<br/>
+        <input type="radio" name="ch" value="own" id="own" onclick='change("own");'/>Video from disk</td><td id="dynamicChoice">Paste video stream: <input placeholder="Paste valid video stream URL." type="text" name="videoStream" size="60" id="videoStream"/></td></tr>
+    <tr><td><p class="VideoParamTitle">Language:</p></td><td><select name="language" id="language">
+        <option ng-repeat="(item_num, items) in searchLang.objects" value="{{ items.id }}">{{ items.language }}</option>
+    </select></td><td></td></tr>
+    <tr><td><p class="VideoParamTitle">Category:</p></td><td><select name="category" id="category">
+        <option ng-repeat="(item_num, items) in searchCat.objects" value="{{ items.id }}">{{ items.cat }}</option>
+    </select></td><td></td></tr>
+    <tr><td><p class="VideoParamTitle">Display image:</p></td><td><input type="file" name="pic" accept="image/*" id="image"><input type="checkbox" name="autoDisplay" value="autoDisplay" id="autoDisplay" checked="checked"/>Auto</td><td></td></tr>
+    <tr><td><p class="VideoParamTitle">Tags:</p></td><td><textarea placeholder="Type video tags for this video. Separate multiple tags with ',' with no spaces. " id="tags" rows="8" cols="31" name="tags"></textarea></td><td></td></tr>
+</table>

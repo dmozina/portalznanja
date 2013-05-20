@@ -15,6 +15,7 @@
     <script src="{{ STATIC_URL }}js/search.js"></script>
     <script src="{{ STATIC_URL }}lib/jquery/jquery-1.9.1.js"></script>
     <script src="{{ STATIC_URL }}lib/jquery/raphael-min.js"></script>
+
     <script>
         videojs.options.flash.swf = "{{ STATIC_URL }}js/video-js.swf"
     </script>
@@ -33,7 +34,13 @@
                     <li class="active, menu"><a href="{% url 'home' %}">Home</a></li>
                     <li class="menu"><a href="{% url 'search' %}">Browse Courses</a></li>
                     <li class="menu"><a href="{% url 'animation' %}">Animation</a></li>
-                    <li class="menu"><a href="">My Panel</a></li>
+                    <li class="menu sub"><a href="">My Panel</a>
+                        <ul id="subContainer">
+                            <li class="subContainerElement topSub"><a href="{% url 'userUpload' %}">Upload a new video</a></li>
+                            <li class="subContainerElement"><a href="{% url 'userVideos' %}">View my videos</a></li>
+                            <li class="subContainerElement"><a href="{% url 'userComments' %}">View my comments</a></li>
+                        </ul>
+                    </li>
                     <li class="menu"><a href="">Discussion Forums</a></li>
                     {% if not user.is_authenticated %}
                         <li class="menu"><a href="{% url 'login' %}">Login</a></li>
