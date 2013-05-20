@@ -116,7 +116,7 @@ def UserUploadView(request):
                 tg, created = Tag.objects.get_or_create(tag_name=tag)
                 video.video_link.add(tg)
             video.save()
-            return HttpResponse(status=200)
+            return redirect("/video/?vId=" + str(video.id))
     else:
         return render_to_response('login.html', None,
                                   context_instance=RequestContext(request))
