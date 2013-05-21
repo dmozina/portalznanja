@@ -13,3 +13,7 @@ manage.py syncdb
 -load data into database
 manage.py loaddata -path to fixture-
 -Example manage.py loaddata C:\IPRI\portalznanja\web\fixtures\fixture
+
+Testing account:
+Username: admin
+Password: password
