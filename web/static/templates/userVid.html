@@ -1,0 +1,18 @@
+<tr ng-repeat="(item_num, items) in userVideos.objects" class="myVideoRow">
+    <td width="100">
+        <a href="/video/?vId={{items.id}}"><p class="myVideoTitle">{{ items.title}}</p></a>
+    </td>
+
+    <td width="250">
+        <br/><br/>
+        <a href="/video/?vId={{items.id}}"><img class="myVideoImage" src="../static/images/{{items.displayImage}}"/></a>
+        <br/><br/>
+    </td>
+
+    <td>
+        <p class="VideoParamTitle">Upvotes: {{ items.upVotes}}</p>
+        <p class="VideoParamTitle">Downvotes: {{ items.downVotes}}</p>
+        <button onclick="removeVideo('{{ items.id }}');" type="button" >Remove</button><br/>
+        <label id="resultRemove{{ items.id }}"></label>
+    </td>
+</tr>

@@ -3,6 +3,9 @@ from tastypie import fields
 from tastypie.resources import ModelResource, ALL_WITH_RELATIONS
 from web.models import FeaturedVideo, Video, Comment, Language, Category, Tag
 from django.contrib.auth.models import User
+from tastypie.authentication import BasicAuthentication
+from tastypie.authorization import DjangoAuthorization
+from tastypie.authentication import ApiKeyAuthentication
 
 
 class LanguageResource(ModelResource):
@@ -17,6 +20,7 @@ class CategoryResource(ModelResource):
         queryset = Category.objects.all()
         resource_name = 'category'
         list_allowed_methods = ['get']
+
 
 class TagResource(ModelResource):
     class Meta:
@@ -87,3 +91,47 @@ class CommentResource(ModelResource):
         filtering = {
             'video': ALL_WITH_RELATIONS,  # FFUUUUUUUUUUUUUU - retarded
         }
+
+
+class MyAuthentication(ApiKeyAuthentication):
+    def is_authenticated(self, request, **kwargs):
+        if request.method == 'GET' and request.user.is_authenticated():
+            return True
+        return super( MyAuthentication, self ).is_authenticated( request, **kwargs )
+
+class MyAuthorization( DjangoAuthorization ):
+    def is_authorized(self, request, object=None):
+        if request.method == 'GET' and request.user.is_authenticated():
+            return True
+        else:
+            return super( MyAuthorization, self ).is_authorized( request, object )
+
+
+class UserVideosResource(ModelResource):
+    class Meta:
+        queryset = Video.objects.all()
+        resource_name = 'userVideos'
+        list_allowed_methods = ['get']
+        detail_allowed_methods = ['get']
+        authentication = MyAuthentication()
+        authorization = MyAuthorization()
+        excludes = ['ratingNum', 'ratingSum', 'length', 'url']
+
+    def apply_authorization_limits(self, request, object_list):
+        return object_list.filter(owner=request.user)
+
+
+class UserCommentsResource(ModelResource):
+    video = fields.ForeignKey(Video4FeaturedResource, 'video', full=True)
+    class Meta:
+        queryset = Comment.objects.all()
+        resource_name = 'userComments'
+        list_allowed_methods = ['get']
+        detail_allowed_methods = ['get']
+        authentication = MyAuthentication()
+        authorization = MyAuthorization()
+
+    def apply_authorization_limits(self, request, object_list):
+        return object_list.filter(owner=request.user)
+
+

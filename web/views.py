@@ -27,6 +27,7 @@ def handle_uploadVideoImage(file):
             destination.write(chunk)
         destination.close()
 
+
 # User login view. On HTTP GET request we provide
 # login.html page and on HTTP POST request we authenticate and
 # authorize user wishing to login. This is done via
@@ -179,9 +180,12 @@ def ManiCommentView(request):
             comment = Comment.objects.get(pk=int(request.POST['commentId']))
             if request.POST['action'] == "up":
                 comment.upVotes += 1
+                comment.save()
             elif request.POST['action'] == "down":
                 comment.downVotes += 1
-            comment.save()
+                comment.save()
+            elif request.POST['action'] == "remove":
+                Comment.objects.filter(pk=int(request.POST['commentId'])).delete()
             return HttpResponse(status=200)
         except:
             return HttpResponse(status=400)
@@ -198,9 +202,12 @@ def ManiVideoView(request):
             video = Video.objects.get(pk=int(request.POST['videoId']))
             if request.POST['action'] == "up":
                 video.upVotes += 1
+                video.save()
             elif request.POST['action'] == "down":
                 video.downVotes += 1
-            video.save()
+                video.save()
+            elif request.POST['action'] == "remove":
+                Video.objects.filter(pk=int(request.POST['videoId'])).delete()
             return HttpResponse(status=200)
         except:
             return HttpResponse(status=400)

@@ -25,3 +25,15 @@ angular.module('ipriUpload', ['ipriServices']).
         $routeProvider
             .when('/', {templateUrl: '/static/templates/upload.html',   controller: SearchCtrl})
     }]);
+
+angular.module('ipriUserVideos', ['ipriServices']).
+    config(['$routeProvider', function($routeProvider) {
+        $routeProvider
+            .when('/', {templateUrl: '/static/templates/userVid.html',   controller: UserVideosCtrl})
+    }]);
+
+angular.module('ipriUserComments', ['ipriServices']).
+    config(['$routeProvider', function($routeProvider) {
+        $routeProvider
+            .when('/', {templateUrl: '/static/templates/userCom.html',   controller: UserCommentsCtrl})
+    }]);
