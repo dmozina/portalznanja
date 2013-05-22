@@ -13,3 +13,11 @@ function SearchCtrl($scope, SearchLang, SearchCat) {
     $scope.searchLang = SearchLang.query();
     $scope.searchCat = SearchCat.query();
 }
+
+function UserVideosCtrl($scope, UserVideos) {
+    $scope.userVideos = UserVideos.query();
+}
+
+function UserCommentsCtrl($scope, UserComments) {
+    $scope.userComments = UserComments.query();
+}

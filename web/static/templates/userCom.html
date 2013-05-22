@@ -1,0 +1,25 @@
+<tr ng-repeat="(item_num, items) in userComments.objects" class="myVideoRow">
+    <td width="350">
+        <div class="comment">
+            <p class="commentAuthor">On {{ items.datePosted }} </p>
+            <p class="votes">Up: {{ items.upVotes }}, Down: {{ items.downVotes }} <label id="resultVote{{ items.id }}" class="right" /></p>
+            <div class="separator"></div>
+            <p>{{ items.text }}</p>
+        </div>
+    </td>
+
+    <td width="100">
+        <p class="VideoParamTitle">On video:</p>
+        <a href="/video/?vId={{items.video.id}}"><p class="myVideoTitle">{{ items.video.title}}</p></a>
+    </td>
+    <td width="130">
+        <a href="/video/?vId={{items.video.id}}"><img class="myVideoImageSmall" src="../static/images/{{items.video.displayImage}}"/></a>
+    </td>
+
+    <td>
+        <br/><br/>
+        <button onclick="removeComment('{{ items.id }}');" type="button" >Remove comment</button><br/>
+        <label id="resultRemove{{ items.id }}"></label>
+        <br/><br/>
+    </td>
+</tr>

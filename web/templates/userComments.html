@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} My comments {% endblock %}
+
+{% block body_attributes %}ng-controller="UserCommentsCtrl"{% endblock %}
+{% block html_attributes %}ng-app="ipriUserComments"{% endblock %}
+
+{% block body %}
+    <h2>My comments:</h2>
+    <table ng-view id="myVideosList">
+
+    </table>
+
+    <script>
+        function removeComment(id) {
+            var keyVal = { "commentId" : id, "action" : "remove"}
+            $.ajax({
+                type: "POST",
+                url: "/maniComment/",
+                data: keyVal,
+                statusCode: {
+                    200: function (data) {
+                        $('#resultRemove' + id).html("Successfully removed comment!");
+                        $('#resultRemove' + id).addClass('green');
+                    },
+                    403: function (data) {
+                        window.location = "/login/"
+                    },
+                    400: function (data) {
+                        $('#resultRemove' + id).html("Error removing comment!");
+                        $('#resultRemove' + id).addClass('red');
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}

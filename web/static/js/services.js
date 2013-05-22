@@ -35,5 +35,17 @@ angular.module('ipriServices', ['ngResource'])
         return $resource('/api/v1/category/?format=json', {}, {
             query: {method:'GET', isArray:false}
         });
+    })
+
+    .factory('UserVideos', function($resource){
+        return $resource('/api/v1/userVideos/?format=json', {}, {
+            query: {method:'GET', isArray:false}
+        });
+    })
+
+    .factory('UserComments', function($resource){
+        return $resource('/api/v1/userComments/?format=json', {}, {
+            query: {method:'GET', isArray:false}
+        });
     });
 
