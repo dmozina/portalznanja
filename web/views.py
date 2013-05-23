@@ -108,7 +108,7 @@ def UserUploadView(request):
             lan = Language.objects.get(pk=int(vLanguage))
             cat = Category.objects.get(pk=int(vCategory))
 
-            video = Video(title=videoName, url="/media/" + vUrl, length=500, owner=request.user, displayImage=pic,
+            video = Video(title=videoName, url="http://127.0.0.1:8000/media/" + vUrl, length=500, owner=request.user, displayImage=pic,
                           language=lan, category=cat)
             video.save()
 

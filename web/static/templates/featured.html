@@ -1,5 +1,5 @@
 
-<ul id="featured">
+<ul id="featured" class="block">
     <li ng-repeat="(item_num, items) in videos.objects" class="featuredVideo">
         <a href="/video/?vId={{items.video.id}}"><p> {{ items.video.title}}</p></a>
         <a href="/video/?vId={{items.video.id}}"><img class="featuredImage" src="static/images/{{items.video.displayImage}}"/></a>

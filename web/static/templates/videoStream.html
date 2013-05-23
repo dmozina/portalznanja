@@ -1,8 +1,8 @@
 <h2 id="videoTitle">{{ videoRel.title }}</h2>
-<h5 id="rating"> Up: {{ videoRel.upVotes }}, Down: {{ videoRel.downVotes }}  <button onclick="voteVideo('u:{{ videoRel.id }}');" name="up:{{ videoRel.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_up.png" title="Up vote"/></button><button  onclick="voteVideo('d:{{ videoRel.id }}');" name="down:{{ videoRel.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_down.png" title="Down vote" /></button> <label id="resultVoteVideo" /></h5><br/>
+<h5 id="rating"> Up: {{ videoRel.upVotes }}, Down: {{ videoRel.downVotes }}  <button onclick="voteVideo('u:{{ videoRel.id }}');" name="up:{{ videoRel.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_up.png" title="Up vote"/></button><button onclick="voteVideo('d:{{ videoRel.id }}');" name="down:{{ videoRel.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_down.png" title="Down vote" /></button> <label id="resultVoteVideo" /></h5><br/>
 Author: {{ videoRel.owner.first_name }}&nbsp;{{ videoRel.owner.last_name }}
 <br/><br/>
-<div class="video">
+<div class="video left">
 <video id="example_video_1" class="video-js vjs-default-skin"
        controls preload="auto" width="640" height="300"
        poster="../static/images/{{videoRel.displayImage}}"
@@ -10,7 +10,7 @@ Author: {{ videoRel.owner.first_name }}&nbsp;{{ videoRel.owner.last_name }}
       <source src="{{videoRel.url}}" type='video/mp4' id="sourceVideo"/>
 </video>
 </div>
-<div class="tags">
+<div class="tags left">
     <h5 id="tagTitle">Video tags:</h5>
     <br/>
     <ul>
@@ -19,7 +19,7 @@ Author: {{ videoRel.owner.first_name }}&nbsp;{{ videoRel.owner.last_name }}
         </li>
     </ul>
 </div>
-<div class="comments">
+<div class="comments clear">
 
     <br/><br/>
     <h2>Comments:</h2> <br/>
@@ -27,7 +27,7 @@ Author: {{ videoRel.owner.first_name }}&nbsp;{{ videoRel.owner.last_name }}
         <div class="comment">
             <p class="commentAuthor">By {{ items.owner.first_name }}&nbsp;{{ items.owner.last_name }} on {{ items.datePosted }} <button  onclick="voteComment('d:{{ items.id }}');" class="right" name="down:{{ items.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_down.png" title="Down vote"/></button><button onclick="voteComment('u:{{ items.id }}');" class="right" name="up:{{ items.id }}" type="button"><img class="voteImg" src="/static/images/thumbs_up.png" title="Up vote"/></button></p>
             <p class="votes">Up: {{ items.upVotes }}, Down: {{ items.downVotes }} <label id="resultVote{{ items.id }}" class="right" /></p>
-            <div class="separator"></div>
+            <div class="separator clear"></div>
             <p>{{ items.text }}</p>
         </div>
     </div>

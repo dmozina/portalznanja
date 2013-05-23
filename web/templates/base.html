@@ -12,7 +12,6 @@
     <script src="{{ STATIC_URL }}js/app.js"></script>
     <script src="{{ STATIC_URL }}js/services.js"></script>
     <script src="{{ STATIC_URL }}js/video.js"></script>
-    <script src="{{ STATIC_URL }}js/search.js"></script>
     <script src="{{ STATIC_URL }}lib/jquery/jquery-1.9.1.js"></script>
     <script src="{{ STATIC_URL }}lib/jquery/raphael-min.js"></script>
 
@@ -20,16 +19,16 @@
         videojs.options.flash.swf = "{{ STATIC_URL }}js/video-js.swf"
     </script>
 </head>
-<body  {% block body_attributes %}{% endblock %}>
+<body  {% block body_attributes %}{% endblock %} class="bgColor">
     <div id="all_container">
-        <div id="header">
+        <div id="header" class="bgColor">
             <div id="logo_container">
                 <img id="logo" src="{{ STATIC_URL }}images/logo.png" />
-                <div id="user">
+                <div id="user" class="right">
                 {% if user.is_authenticated %} Welcome, <a href="/user">{{ user.first_name }} </a>!{% endif %}
                 </div>
             </div>
-            <div id="menu" >
+            <div id="menu" class="bgColor">
                 <ul>
                     <li class="active, menu"><a href="{% url 'home' %}">Home</a></li>
                     <li class="menu"><a href="{% url 'search' %}">Browse Courses</a></li>
@@ -55,8 +54,8 @@
             {% block body %}{% endblock %}
         </div>
 
-        <div id="footer">
-            <div id="info">
+        <div id="footer" class="bgColor">
+            <div id="info" class="right">
                 Developed by:
                 <ul>
                     <li>David Možina</li>

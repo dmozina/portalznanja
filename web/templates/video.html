@@ -18,108 +18,19 @@
             <br/>
             <input type="submit" value="Comment!"><br/><label id="result"></label>
         </form>
-        <script>
-            function voteComment(what) {
-                var commentId= what.split(":")[1];
-                var action = "";
-                if (what.charAt(0) == "u") {
-                    action = "up";
-                } else if (what.charAt(0) == "d") {
-                    action = "down";
-                }
 
-                var keyVal = { "commentId" : commentId, "action" : action}
-                $.ajax({
-                    type: "POST",
-                    url: "/maniComment/",
-                    data: keyVal,
-                    statusCode: {
-                        200: function (data) {
-                            $('#resultVote' + commentId).html("Successfully voted!");
-                            $('#resultVote' + commentId).addClass('green');
-                        },
-                        403: function (data) {
-                            window.location = "/login/"
-                        },
-                        400: function (data) {
-                            $('#resultVote' + commentId).html("Error voting!");
-                            $('#resultVote' + commentId).addClass('red');
-                        }
-                    }
-                });
-            };
-
-
-            function voteVideo(what) {
-                var videoId= what.split(":")[1];
-                var action = "";
-                if (what.charAt(0) == "u") {
-                    action = "up";
-                } else if (what.charAt(0) == "d") {
-                    action = "down";
-                }
-
-                var keyVal = { "videoId" : videoId, "action" : action}
-                $.ajax({
-                    type: "POST",
-                    url: "/maniVideo/",
-                    data: keyVal,
-                    statusCode: {
-                        200: function (data) {
-                            $('#resultVoteVideo').html("Successfully voted!");
-                            $('#resultVoteVideo').addClass('green');
-                        },
-                        403: function (data) {
-                            window.location = "/login/"
-                        },
-                        400: function (data) {
-                            $('#resultVoteVideo').html("Error voting!");
-                            $('#resultVoteVideo').addClass('red');
-                        }
-                    }
-                });
-            }
-
-            var frm = $('#myForm');
-            frm.submit(function () {
-                $.ajax({
-                    type: frm.attr('method'),
-                    url: frm.attr('action'),
-                    data: frm.serialize(),
-                    statusCode: {
-                        200: function (data) {
-                            $('#result').html("Successfully added new comment!");
-                            $('#result').addClass('green');
-                        },
-                        400: function (data) {
-                            $('#result').html("Error adding new comment!");
-                            $('#result').addClass('red');
-                        }
-                    }
-                });
-                return false;
-            });
-
-            function getParameterByName(name) {
-                var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-                return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
-            }
-
-            $(document).ready(function() {
-                $('#vIdInput').val(getParameterByName("vId"));
-
-                $('#txt').keyup(function () {
-                    $('#numChars').html($(this).val().length);
-                });
-
-                setTimeout(function(){
-                    var url = $("#sourceVideo").attr("src");
-                    if (url.indexOf("http") < 0) {
-                        $("#sourceVideo").attr("src", document.location.origin + url)
-                    }
-                },500)
-
-            });
-        </script>
     {% endif %}
+    <script src="{{ STATIC_URL }}js/IPRIVideo.js"></script>
+
+    <script>
+        setTimeout(function () {
+            var script = document.createElement("script");
+
+            // This script has a callback function that will run when the script has
+            // finished loading.
+            script.src = "{{ STATIC_URL }}js/video.js";
+            script.type = "text/javascript";
+            document.getElementsByTagName("head")[0].appendChild(script);
+        } , 1500);
+    </script>
 {% endblock %}
