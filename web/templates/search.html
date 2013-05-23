@@ -5,7 +5,7 @@
 {% block html_attributes %}ng-app="ipriSearch"{% endblock %}
 
 {% block body %}
-    <div id="searchContainer">
+    <div id="searchContainer" class="left">
         <form id="searchForm">
             <input id="Search" type="Text" name="search" value="Search..." onfocus="{this.value = '';}" onblur="{this.value = 'Search...';}" />
             <input type="Submit" value="Go" />
@@ -17,11 +17,12 @@
 
         </div>
     </div>
-    <div id="searchVideosContainer">
-        <ul id="vidUl">
+    <div id="searchVideosContainer" class="left">
+        <ul id="vidUl" class="block">
 
         </ul>
     </div>
+    <script src="{{ STATIC_URL }}js/search.js"></script>
     <script>
         $(document).ready(function() {
             getAllVideos();

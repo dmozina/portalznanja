@@ -3,11 +3,11 @@ from tastypie import fields
 from tastypie.resources import ModelResource, ALL_WITH_RELATIONS
 from web.models import FeaturedVideo, Video, Comment, Language, Category, Tag
 from django.contrib.auth.models import User
-from tastypie.authentication import BasicAuthentication
 from tastypie.authorization import DjangoAuthorization
 from tastypie.authentication import ApiKeyAuthentication
 
 
+#Language resource.
 class LanguageResource(ModelResource):
     class Meta:
         queryset = Language.objects.all()
@@ -15,25 +15,27 @@ class LanguageResource(ModelResource):
         list_allowed_methods = ['get']
 
 
+#Category resource.
 class CategoryResource(ModelResource):
     class Meta:
         queryset = Category.objects.all()
         resource_name = 'category'
         list_allowed_methods = ['get']
 
-
+#Tag resource.
 class TagResource(ModelResource):
     class Meta:
         queryset = Tag.objects.all()
         resource_name = 'tags'
         list_allowed_methods = ['get']
 
-    #This is custom video web service called from featured
-    # video web service. It returns the following columns from the
-    #Video table.
-    #id -  for page redirection to /video?id=<video_id>
-    #title
-    #displayImage - for JS to grab image from media folder and display it
+
+#This is custom video web service called from featured
+#video web service. It returns the following columns from the
+#Video table.
+#id -  for page redirection to /video?id=<video_id>
+#title
+#displayImage - for JS to grab image from media folder and display it
 class Video4FeaturedResource(ModelResource):
     language = fields.ForeignKey(LanguageResource, 'language', full=True)
     category = fields.ForeignKey(CategoryResource, 'category', full=True)
@@ -89,22 +91,25 @@ class CommentResource(ModelResource):
         resource_name = 'comments'
         list_allowed_methods = ['get', 'post']
         filtering = {
-            'video': ALL_WITH_RELATIONS,  # FFUUUUUUUUUUUUUU - retarded
+            'video': ALL_WITH_RELATIONS,
         }
 
 
+#Custom authentication.
 class MyAuthentication(ApiKeyAuthentication):
     def is_authenticated(self, request, **kwargs):
         if request.method == 'GET' and request.user.is_authenticated():
             return True
-        return super( MyAuthentication, self ).is_authenticated( request, **kwargs )
+        return super(MyAuthentication, self).is_authenticated(request, **kwargs)
 
+
+#Custom authorization.
 class MyAuthorization( DjangoAuthorization ):
     def is_authorized(self, request, object=None):
         if request.method == 'GET' and request.user.is_authenticated():
             return True
         else:
-            return super( MyAuthorization, self ).is_authorized( request, object )
+            return super(MyAuthorization, self).is_authorized(request, object)
 
 
 class UserVideosResource(ModelResource):
@@ -124,6 +129,7 @@ class UserVideosResource(ModelResource):
 
 class UserCommentsResource(ModelResource):
     video = fields.ForeignKey(Video4FeaturedResource, 'video', full=True)
+
     class Meta:
         queryset = Comment.objects.all()
         resource_name = 'userComments'
