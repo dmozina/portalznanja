@@ -10,6 +10,8 @@ from django.contrib.auth.models import User
 from models import Video, Comment, Language, Category, Tag
 from datetime import datetime
 from portalznanja import settings
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
 
 
 def handle_uploadVideo(file):
@@ -48,6 +50,34 @@ def LoginView(request):
                 return render_to_response('login.html', None,
                                           context_instance=RequestContext(
                                               request))
+
+def RegisterView(request):
+    if request.method == 'POST':
+        user_name = request.POST['un']
+        pass1 = request.POST['pw']
+        pass2 = request.POST['pw2']
+        if pass1 != pass2:
+            return render_to_response('register.html', None,
+                                      context_instance=RequestContext(
+                                          request))
+
+        else:
+            password = pass1
+        first_name = request.POST['first']
+        last_name = request.POST['last']
+        email = request.POST['email']
+        user = User.objects.create_user(user_name, email, password)
+        user.last_name = last_name
+        user.first_name = first_name
+        user.save()
+        #user = authenticate(user_name, pass1)
+        #if user is not None and user.is_active:
+        #    login(request, user)
+        return redirect('/#/')
+    else:
+        return render_to_response('register.html', None,
+                              context_instance=RequestContext(
+                                  request))
 
 
 # User logout view. Inherited logout() method is called which logs

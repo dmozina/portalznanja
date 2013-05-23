@@ -115,6 +115,7 @@ class UserVideosResource(ModelResource):
         detail_allowed_methods = ['get']
         authentication = MyAuthentication()
         authorization = MyAuthorization()
+        #authorization = DjangoAuthorization()
         excludes = ['ratingNum', 'ratingSum', 'length', 'url']
 
     def apply_authorization_limits(self, request, object_list):

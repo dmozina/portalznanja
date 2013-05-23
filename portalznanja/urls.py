@@ -25,6 +25,7 @@ urlpatterns = patterns(
     #User management:
     url(r'^login/$', views.LoginView, name='login'),
     url(r'^logout/$', views.LogoutView, name='logout'),
+    url(r'^register/$', views.RegisterView, name='register'),
     url(r'^user/$', views.UserView),
     url(r'^user/upload$', views.UserUploadView, name='userUpload'),
     url(r'^user/videos$', views.UserVideosView, name='userVideos'),
