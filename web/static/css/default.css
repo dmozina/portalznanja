@@ -13,6 +13,39 @@ table, caption, tbody, tfoot, thead, tr, th, td {
     font-family: Arial !important;
 }
 
+/* some global style definitions */
 a, a.visited {
     color: #00a;
+}
+
+.left {
+    float:left;
+}
+
+.clear {
+    clear:both;
+}
+
+.right {
+    float:right;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.red {
+    color: #c00;
+}
+
+.green {
+    color: #0c0;
+}
+
+.bgColor {
+    background-color: #ddd;
+}
+
+.block {
+    display:block;
 }

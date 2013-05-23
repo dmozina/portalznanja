@@ -27,6 +27,7 @@ function populateHtml () {
     for (var i = 0; i < current.length; i++) {
         var newLi = document.createElement("li");
         newLi.className += " vid";
+        newLi.className += " left";
         ul.appendChild(newLi);
 
         var ti = document.createElement("a");
