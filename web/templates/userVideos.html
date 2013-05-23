@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %} My videos {% endblock %}
+
+{% block body_attributes %}ng-controller="UserVideosCtrl"{% endblock %}
+{% block html_attributes %}ng-app="ipriUserVideos"{% endblock %}
+
+{% block body %}
+    <h2>My videos:</h2>
+    <table ng-view id="myVideosList">
+
+    </table>
+
+    <script>
+        function removeVideo(id) {
+            var keyVal = { "videoId" : id, "action" : "remove"}
+            $.ajax({
+                type: "POST",
+                url: "/maniVideo/",
+                data: keyVal,
+                statusCode: {
+                    200: function (data) {
+                        $('#resultRemove' + id).html("Successfully removed video!");
+                        $('#resultRemove' + id).addClass('green');
+                    },
+                    403: function (data) {
+                        window.location = "/login/"
+                    },
+                    400: function (data) {
+                        $('#resultRemove' + id).html("Error removing video!");
+                        $('#resultRemove' + id).addClass('red');
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}
